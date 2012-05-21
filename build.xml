@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+<project default="init" basedir=".">
+
+<target name="init">
+    <echo message="Copying files to /home/phpmywhs"/>
+    <sync todir="/home/phpmywhs">
+        <fileset dir=".">
+            <include name="**/*.html" />
+            <include name="**/*.htm" />
+            <include name="**/*.php" />
+            <include name="**/*.css" />
+            <include name="**/*.js" />
+        	<include name="**/*.xml" />
+            <include name="**/*.jpg" />
+            <include name="**/*.png" />
+            <include name="**/*.gif" />
+        	<include name="**/.htaccess" />
+            <exclude name="env.php"/>
+        	<exclude name="build.xml"/>
+        </fileset> 
+    </sync>
+</target>
+
+</project>
