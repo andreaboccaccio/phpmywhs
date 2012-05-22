@@ -18,6 +18,7 @@
         	<include name="**/.htaccess" />
             <exclude name="env.php"/>
         	<exclude name="build.xml"/>
+        	<exclude name="sql/"/>
         </fileset> 
     </sync>
 </target>

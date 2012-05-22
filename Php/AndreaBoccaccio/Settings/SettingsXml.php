@@ -55,8 +55,14 @@ class Php_AndreaBoccaccio_Settings_SettingsXml extends Php_AndreaBoccaccio_Setti
 		$strXPathQuery = '//config/' . str_replace('.', '/', $settingFullName);
 		$nodes = $xpath->query($strXPathQuery);
 		$firstNode = $nodes->item(0);
+		$firstValue = '';
 		if($firstNode != null) {
 			$ret = $this->settings->saveXML($firstNode);
+			$firstValue = preg_split("/[\s]+/", trim($firstNode->nodeValue));
+			$ret = $firstValue[0];
+		}
+		else {
+			$ret = '';
 		}
 		return $ret;
 	}

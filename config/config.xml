@@ -21,10 +21,13 @@ along with phpmywhs.  If not, see <http://www.gnu.org/licenses/>.
  -->
 <!DOCTYPE config>
 <config>
-<prova>
-<maggiore>6</maggiore>
-<minore>10</minore>
-</prova>
-<banane></banane>
-<pere>25</pere>
+<db>
+<server>localhost</server>
+<username>phpmywhstest</username>
+<password>phpmywhstest</password>
+<dbname>phpmywhstest</dbname>
+</db>
+<classes>
+<db>mysql</db>
+</classes>
 </config>
