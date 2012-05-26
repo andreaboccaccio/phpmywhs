@@ -87,6 +87,14 @@ class Php_MyPhpWarehouse implements Php_AppInterface {
 		echo htmlentities(var_dump($test));
 		echo "</pre>\n";
 		echo "</div>\n";
+		echo "<div>";
+		echo "<p>";
+		echo "<a href=\"https://github.com/andreaboccaccio/phpmywhs\">";
+		echo "here";
+		echo "</a>"; 
+		echo "you can find the source code";
+		echo "</p>";
+		echo "</div>";
 		echo "</body>\n";
 		echo "</html>\n";
 	}

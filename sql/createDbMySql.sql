@@ -21,6 +21,8 @@
 --
 CREATE DATABASE IF NOT EXISTS phpmywhstest;
 
-CREATE USER 'phpmywhstest'@'localhost' IDENTIFIED BY 'phpmywhstest';
+--CREATE USER 'phpmywhstest'@'localhost' IDENTIFIED BY 'phpmywhstest';
 
-GRANT ALL ON phpmywhstest.* TO 'phpmywhstest'@'localhost';
+--GRANT ALL ON phpmywhstest.* TO 'phpmywhstest'@'localhost';
+
+USE phpmywhstest;
