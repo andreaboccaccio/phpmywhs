@@ -20,34 +20,52 @@
  * along with phpmywhs. If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-class Php_AndreaBoccaccio_Login_LoginNull extends Php_AndreaBoccaccio_Login_LoginAbstract {
-	
+class Php_AndreaBoccaccio_View_ViewLogin extends Php_AndreaBoccaccio_View_ViewConsistentAbstract {
+
 	private static $instance = null;
-	
+
 	private function __clone() {
-	
+
 	}
-	
+
 	private function __construct() {
-		$this->setKind('null');
+		$this->setKind('login');
 	}
-	
+
 	public static function getInstance() {
 		if(self::$instance == null) {
-			self::$instance = new Php_AndreaBoccaccio_Login_LoginNull();
+			self::$instance = new Php_AndreaBoccaccio_View_ViewLogin();
 		}
 		return self::$instance;
 	}
-	
-	public function getNewSessionCode($usr = null, $pwd = null, $code = null) {
-		return null;
+
+	public function getMenu() {
+		$ret = '';
+
+		return $ret;
 	}
-	
-	public function getUserLevel($code) {
-		return null;
-	}
-	
-	public function logout($code) {
-		return null;
+
+	public function getBody() {
+		$ret = '';
+		
+		$ret = "<div id=\"body\">";
+		$ret .= "<form method=\"post\" action=\"";
+		$ret .= $_SERVER["PHP_SELF"];
+		$ret .= "?doLogin=yes\"> ";
+		$ret .= "<div class=\"label\">User:</div>";
+		$ret .= "<div class=\"input\">";
+		$ret .= "<input type=\"text\" name=\"usr\" />";
+		$ret .= "</div>";
+		$ret .= "<div class=\"label\">Password:</div>";
+		$ret .= "<div class=\"input\">";
+		$ret .= "<input type=\"password\" name=\"pwd\" />";
+		$ret .= "</div>";
+		$ret .= "<div class=\"submit\">";
+		$ret .= "<input type=\"submit\" value=\"Login\" />";
+		$ret .= "</div>";
+		$ret .= "</form>";
+		$ret .= "</div>";
+
+		return $ret;
 	}
 }

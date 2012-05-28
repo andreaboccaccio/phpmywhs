@@ -244,4 +244,18 @@ class Php_AndreaBoccaccio_Login_LoginRandom extends Php_AndreaBoccaccio_Login_Lo
 		
 		return $ret;
 	}
+	
+	public function logout($code) {
+		$setting = Php_AndreaBoccaccio_Settings_SettingsFactory::getInstance()->getSettings('xml');
+		$db = Php_AndreaBoccaccio_Db_DbFactory::getInstance()->getDb($setting->getSettingFromFullName('classes.db'));
+		$strSQL = '';
+		
+		if($code != null) {
+			$strSQL = "DELETE FROM USER SESSION ";
+			$strSQL .= " WHERE (S.code='";
+			$strSQL .= $code;
+			$strSQL .= "');";
+			$res = $db->execQuery($strSQL);
+		}
+	}
 }

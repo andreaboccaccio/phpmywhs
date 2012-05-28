@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+div#banner {
+	clear:left;
+	margin:5px;
+}
+div#menu {
+	background-color:#f0f0f0;
+	float:left;
+	margin:5px;
+	height:400px;
+}
+div#body {
+	margin:5px;
+}
+div#footer {
+	clear:left;
+	margin:5px;
+}
+.menuentry a {
+	color:inherit;
+	text-decoration:none;
+}
+.menuentry a:hover{
+	background-color:#fafafa;
+}
+.label {
+	float:left;
+	width:100px;
+	margin:5px;
+}
+.input {
+	margin:5px;
+}
+.submit {
+	margin-left:110px;
+}
+.list  {
+	height:300px;
+	overflow:auto;
+}
+.tab {
+	border:1px solid black;
+}

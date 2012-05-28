@@ -20,34 +20,38 @@
  * along with phpmywhs. If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-class Php_AndreaBoccaccio_Login_LoginNull extends Php_AndreaBoccaccio_Login_LoginAbstract {
-	
+class Php_AndreaBoccaccio_View_ViewVoid extends Php_AndreaBoccaccio_View_ViewAbstract {
+
 	private static $instance = null;
-	
+
 	private function __clone() {
-	
+
 	}
-	
+
 	private function __construct() {
-		$this->setKind('null');
+		$this->setKind('void');
 	}
-	
+
 	public static function getInstance() {
 		if(self::$instance == null) {
-			self::$instance = new Php_AndreaBoccaccio_Login_LoginNull();
+			self::$instance = new Php_AndreaBoccaccio_View_ViewVoid();
 		}
 		return self::$instance;
 	}
-	
-	public function getNewSessionCode($usr = null, $pwd = null, $code = null) {
-		return null;
+
+	public function getBanner() {
+		return '';
 	}
-	
-	public function getUserLevel($code) {
-		return null;
+
+	public function getMenu() {
+		return '';
 	}
-	
-	public function logout($code) {
-		return null;
+
+	public function getFooter() {
+		return '';
+	}
+
+	public function getBody() {
+		return '';
 	}
 }

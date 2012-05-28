@@ -46,4 +46,8 @@ class Php_AndreaBoccaccio_Login_LoginVoid extends Php_AndreaBoccaccio_Login_Logi
 	public function getUserLevel($code) {
 		return '';
 	}
+	
+	public function logout($code) {
+		return '';
+	}
 }

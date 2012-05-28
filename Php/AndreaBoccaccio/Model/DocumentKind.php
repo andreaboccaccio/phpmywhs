@@ -96,7 +96,7 @@ class Php_AndreaBoccaccio_Model_DocumentKind {
 		if($id > 0) {
 			$setting = Php_AndreaBoccaccio_Settings_SettingsFactory::getInstance()->getSettings('xml');
 			$db = Php_AndreaBoccaccio_Db_DbFactory::getInstance()->getDb($setting->getSettingFromFullName('classes.db'));
-			$strSQL = "SELECT * FROM DOCUMENT_KIND WHERE ((id=";
+			$strSQL = "SELECT * FROM DOCUMENT_KIND WHERE (id=";
 			$strSQL .= $id;
 			$strSQL .= ");";
 			$res = $db->execQuery($strSQL);
@@ -115,10 +115,11 @@ class Php_AndreaBoccaccio_Model_DocumentKind {
 		$setting;
 		$db;
 		$newObj = 0;
+
 		if($this->changed) {
-			if($this->id > 0) {
-				$setting = Php_AndreaBoccaccio_Settings_SettingsFactory::getInstance()->getSettings('xml');
-				$db = Php_AndreaBoccaccio_Db_DbFactory::getInstance()->getDb($setting->getSettingFromFullName('classes.db'));
+			$setting = Php_AndreaBoccaccio_Settings_SettingsFactory::getInstance()->getSettings('xml');
+			$db = Php_AndreaBoccaccio_Db_DbFactory::getInstance()->getDb($setting->getSettingFromFullName('classes.db'));
+			if($this->id > 0) {				
 				$strSQL = "SELECT * FROM DOCUMENT_KIND WHERE ((id=";
 				$strSQL .= $this->id;
 				$strSQL .= ");";
@@ -151,7 +152,7 @@ class Php_AndreaBoccaccio_Model_DocumentKind {
 				}
 			}
 			else {
-				$strSQL = "UPDATE DOCUMENT_KIND SET  ";
+				$strSQL = "UPDATE DOCUMENT_KIND ";
 				$strSQL .= "SET code='";
 				$strSQL .= $this->getCode();
 				$strSQL .= "', name='";
@@ -162,6 +163,7 @@ class Php_AndreaBoccaccio_Model_DocumentKind {
 				$strSQL .= $this->getId();
 				$strSQL .= ");";
 				$res = $db->execQuery($strSQL);
+				var_dump($res);
 				if($res["success"] == TRUE) {
 					$ret = $res["numrows"];
 				}

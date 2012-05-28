@@ -24,4 +24,6 @@ interface Php_AndreaBoccaccio_Login_LoginInterface {
 	public function getNewSessionCode($usr, $pwd, $code);
 	
 	public function getUserLevel($code);
+	
+	public function logout($code);
 }

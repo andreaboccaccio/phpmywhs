@@ -74,7 +74,7 @@ class Php_AndreaBoccaccio_Model_DocumentKindManager {
 		$res = $db->execQuery($strSQL);
 		if($res["success"] == TRUE) {
 			if($res["numrows"] > 0) {
-				for ($i = 0; $i < $ret; ++$i) {
+				for ($i = 0; $i < $res["numrows"]; ++$i) {
 					$tmpRow = $res["result"][$i];
 					$tmpDocKind = new Php_AndreaBoccaccio_Model_DocumentKind();
 					$tmpDocKind->init($tmpRow["id"], $tmpRow["code"], $tmpRow["name"], $tmpRow["description"]);
@@ -83,5 +83,15 @@ class Php_AndreaBoccaccio_Model_DocumentKindManager {
 			}
 		}
 		return $this->docKindArray;
+	}
+	
+	public function eraseDocumentKind($id) {
+		$setting = Php_AndreaBoccaccio_Settings_SettingsFactory::getInstance()->getSettings('xml');
+		$db = Php_AndreaBoccaccio_Db_DbFactory::getInstance()->getDb($setting->getSettingFromFullName('classes.db'));
+		$strSQL = "DELETE FROM DOCUMENT_KIND";
+		$res = array();
+		
+		$strSQL .= " WHERE(id=" .$id .");";
+		$res = $db->execQuery($strSQL);
 	}
 }

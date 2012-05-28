@@ -20,7 +20,7 @@
  * along with phpmywhs. If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-class Php_AndreaBoccaccio_Login_LoginNull extends Php_AndreaBoccaccio_Login_LoginAbstract {
+class Php_AndreaBoccaccio_View_ViewMain extends Php_AndreaBoccaccio_View_ViewConsistentAbstract {
 	
 	private static $instance = null;
 	
@@ -29,25 +29,38 @@ class Php_AndreaBoccaccio_Login_LoginNull extends Php_AndreaBoccaccio_Login_Logi
 	}
 	
 	private function __construct() {
-		$this->setKind('null');
+		$this->setKind('main');
 	}
 	
 	public static function getInstance() {
 		if(self::$instance == null) {
-			self::$instance = new Php_AndreaBoccaccio_Login_LoginNull();
+			self::$instance = new Php_AndreaBoccaccio_View_ViewMain();
 		}
 		return self::$instance;
 	}
 	
-	public function getNewSessionCode($usr = null, $pwd = null, $code = null) {
-		return null;
+	public function getMenu() {
+		$ret = parent::getMenu();
+		
+		$ret .= "<div id=\"tipoDocumento\" class=\"menuentry\">\n";
+		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=documentKindMain\">Tipo Documento</a>";
+		$ret .= "</div>\n";
+		$ret .= "</div>\n";
+		
+		return $ret;
 	}
 	
-	public function getUserLevel($code) {
-		return null;
-	}
-	
-	public function logout($code) {
-		return null;
+	public function getBody() {
+		$ret = '';
+		$mytime = time();
+		
+		$ret .= "<div id=\"body\">";
+		$ret .= "Welcome";
+		$ret .= "<p>" . $mytime ."</p>";
+		$ret .= "<p>Local server datetime " . strftime('%Y%m%d %H%M%S',$mytime) ."</p>";
+		$ret .= "<p>UTC datetime" . gmstrftime('%Y%m%d %H%M%S',$mytime) ."</p>";
+		$ret .= "</div>";
+		
+		return $ret;
 	}
 }

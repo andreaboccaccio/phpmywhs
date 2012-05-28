@@ -11,4 +11,13 @@
 		<class default="no" id="Php_AndreaBoccaccio_Login_LoginVoid" />
 		<class default="no" id="Php_AndreaBoccaccio_Login_LoginRandom" />
 	</factory>
+	<factory id="view">
+		<class default="yes" id="Php_AndreaBoccaccio_View_ViewNull" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewVoid" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewMain" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewLogin" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewDocumentKindMain" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewDocumentKindInsert" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewDocumentKind" />
+	</factory>
 </factories>

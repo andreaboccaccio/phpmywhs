@@ -20,34 +20,40 @@
  * along with phpmywhs. If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-class Php_AndreaBoccaccio_Login_LoginNull extends Php_AndreaBoccaccio_Login_LoginAbstract {
-	
-	private static $instance = null;
-	
-	private function __clone() {
-	
+abstract class Php_AndreaBoccaccio_View_ViewConsistentAbstract extends Php_AndreaBoccaccio_View_ViewAbstract {
+
+	public function getBanner() {
+		$ret = '';
+		
+		$ret = "<div id=\"banner\">\n";
+		$ret .= "phpmywhs: a quite incomplete custom application about a warehouse\n";
+		$ret .= "</div>\n";
+		
+		return $ret;
 	}
 	
-	private function __construct() {
-		$this->setKind('null');
+	public function getMenu() {
+		$ret = '';
+		
+		$ret = "<div id=\"menu\">\n";
+		$ret .= "<div id=\"logout\" class=\"menuentry\">\n";
+		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?doLogout=yes\">Esci</a>";
+		$ret .= "</div>\n";
+		
+		return $ret;
 	}
 	
-	public static function getInstance() {
-		if(self::$instance == null) {
-			self::$instance = new Php_AndreaBoccaccio_Login_LoginNull();
-		}
-		return self::$instance;
-	}
-	
-	public function getNewSessionCode($usr = null, $pwd = null, $code = null) {
-		return null;
-	}
-	
-	public function getUserLevel($code) {
-		return null;
-	}
-	
-	public function logout($code) {
-		return null;
+	public function getFooter() {
+		
+		$ret = '';
+		
+		$ret = "<div id=\"footer\">";
+		$ret .= "<a href=\"https://github.com/andreaboccaccio/phpmywhs\">";
+		$ret .= "here";
+		$ret .= "</a>";
+		$ret .= " you can find the source code";
+		$ret .= "</div>";
+		
+		return $ret;
 	}
 }
