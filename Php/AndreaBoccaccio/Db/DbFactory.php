@@ -20,11 +20,7 @@
  * along with phpmywhs. If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-class Php_AndreaBoccaccio_Db_DbFactory {
-	
-	private $dbArray;
-	
-	private $dbDefault;
+class Php_AndreaBoccaccio_Db_DbFactory extends Php_AndreaBoccaccio_SingletonFactoryAbstract {
 	
 	private static $instance = null;
 	
@@ -33,6 +29,7 @@ class Php_AndreaBoccaccio_Db_DbFactory {
 	}
 	
 	private function __construct() {
+		$this->setKind('db');
 		$this->init();
 	}
 	
@@ -43,30 +40,8 @@ class Php_AndreaBoccaccio_Db_DbFactory {
 		return self::$instance;
 	}
 	
-	private function getClasses() {
-		$retArray = array(
-				'Php_AndreaBoccaccio_Db_DbVoid',
-				'Php_AndreaBoccaccio_Db_DbVerySimpleMySql'
-		);
-		return $retArray;
-	}
-	
-	private function init() {
-		foreach ($this->getClasses() as $tmpStrDb) {
-			$tmpDb = $tmpStrDb::getInstance();
-			$this->dbArray[$tmpDb->getKind()] = $tmpDb;
-		}
-		$this->dbDefault = Php_AndreaBoccaccio_Settings_SettingsNull::getInstance();
-	}
-	
 	public function getDb($kind) {
-		$ret = null;
-		if(array_key_exists($kind, $this->dbArray)) {
-			$ret = $this->dbArray[$kind];
-		}
-		else {
-			$ret = $this->dbDefault;
-		}
-		return $ret;
+		
+		return $this->getClass($kind);
 	}
 }

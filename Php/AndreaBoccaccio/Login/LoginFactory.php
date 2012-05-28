@@ -20,7 +20,7 @@
  * along with phpmywhs. If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-class Php_AndreaBoccaccio_Db_DbVoid extends Php_AndreaBoccaccio_Db_DbAbstract {
+class Php_AndreaBoccaccio_Login_LoginFactory extends Php_AndreaBoccaccio_SingletonFactoryAbstract {
 	
 	private static $instance = null;
 	
@@ -29,25 +29,19 @@ class Php_AndreaBoccaccio_Db_DbVoid extends Php_AndreaBoccaccio_Db_DbAbstract {
 	}
 	
 	private function __construct() {
-		$this->setKind('void');
+		$this->setKind('login');
+		$this->init();
 	}
 	
 	public static function getInstance() {
 		if(self::$instance == null) {
-			self::$instance = new Php_AndreaBoccaccio_Db_DbVoid();
+			self::$instance = new Php_AndreaBoccaccio_Login_LoginFactory();
 		}
 		return self::$instance;
 	}
 	
-	public function execQuery($strSQL) {
-		return '';
-	}
+	public function getLogin($kind) {
 	
-	public function closeConnection() {
-		return TRUE;
-	}
-	
-	public function sanitize($str) {
-		return '';
+		return $this->getClass($kind);
 	}
 }

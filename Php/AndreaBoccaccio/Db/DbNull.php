@@ -46,4 +46,8 @@ class Php_AndreaBoccaccio_Db_DbNull extends Php_AndreaBoccaccio_Db_DbAbstract {
 	public function closeConnection() {
 		return null;
 	}
+	
+	public function sanitize($str) {
+		return null;
+	}
 }

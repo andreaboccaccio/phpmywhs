@@ -31,7 +31,6 @@ class Php_AndreaBoccaccio_Db_DbVerySimpleMySql extends Php_AndreaBoccaccio_Db_Db
 	
 	private function __construct() {
 		$this->setKind('mysql');
-		$this->init();
 	}
 	
 	public static function getInstance() {
@@ -41,7 +40,7 @@ class Php_AndreaBoccaccio_Db_DbVerySimpleMySql extends Php_AndreaBoccaccio_Db_Db
 		return self::$instance;
 	}
 	
-	private function init() {
+	private function connect() {
 		$settingsFac = Php_AndreaBoccaccio_Settings_SettingsFactory::getInstance();
 		$settings = $settingsFac->getSettings('xml');
 		$server = $settings->getSettingFromFullName('db.server');
@@ -65,6 +64,7 @@ class Php_AndreaBoccaccio_Db_DbVerySimpleMySql extends Php_AndreaBoccaccio_Db_Db
 		$resultArray = array();
 		$i = -1;
 		
+		$this->connect();
 		//$strSQL = mysql_real_escape_string(trim($strSQL),$this->dbconn);
 		$strSQL = trim($strSQL);
 		if(substr_compare($strSQL, "SELECT", 0, strlen("SELECT"), TRUE) == 0) {
@@ -121,5 +121,10 @@ class Php_AndreaBoccaccio_Db_DbVerySimpleMySql extends Php_AndreaBoccaccio_Db_Db
 			$ret = TRUE;
 		}
 		return $ret;
+	}
+	
+	public function sanitize($str) {
+		$this->connect();
+		return mysql_real_escape_string($str,$this->dbconn);
 	}
 }

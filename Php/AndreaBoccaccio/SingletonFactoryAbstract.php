@@ -20,34 +20,24 @@
  * along with phpmywhs. If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-class Php_AndreaBoccaccio_Db_DbVoid extends Php_AndreaBoccaccio_Db_DbAbstract {
+abstract class Php_AndreaBoccaccio_SingletonFactoryAbstract extends Php_AndreaBoccaccio_FactoryAbstract {
 	
-	private static $instance = null;
+	protected function init() {
 	
-	private function __clone() {
-	
-	}
-	
-	private function __construct() {
-		$this->setKind('void');
-	}
-	
-	public static function getInstance() {
-		if(self::$instance == null) {
-			self::$instance = new Php_AndreaBoccaccio_Db_DbVoid();
+		foreach ($this->getClasses() as $tmpStrCl) {
+			$tmpCl = $tmpStrCl::getInstance();
+			$this->classArray[$tmpCl->getKind()] = $tmpCl;
 		}
-		return self::$instance;
 	}
 	
-	public function execQuery($strSQL) {
-		return '';
-	}
-	
-	public function closeConnection() {
-		return TRUE;
-	}
-	
-	public function sanitize($str) {
-		return '';
+	public function getClass($kind) {
+		$ret = null;
+		if(array_key_exists($kind, $this->classArray)) {
+			$ret = $this->classArray[$kind];
+		}
+		else {
+			$ret = $this->classArray[$this->classDefault];
+		}
+		return $ret;
 	}
 }

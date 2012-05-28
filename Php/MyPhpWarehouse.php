@@ -23,76 +23,83 @@
 class Php_MyPhpWarehouse implements Php_AppInterface {
 	
 	public function myMain() {
-		$testSQL = '';
+		$securityLevel = 100;
+		$sessionCode = '';
+		$newSessionCode = '';
+		$usr = '';
+		$pwd = '';
+		$loggedIn = 0;
 		$settingsFact = Php_AndreaBoccaccio_Settings_SettingsFactory::getInstance();
+		$loginFact = Php_AndreaBoccaccio_Login_LoginFactory::getInstance();
 		$dbFact = Php_AndreaBoccaccio_Db_DbFactory::getInstance();
 		$settings = $settingsFact->getSettings('xml');
 		$db = $dbFact->getDb($settings->getSettingFromFullName('classes.db'));
-		$test = array();
+		$login = $loginFact->getLogin($settings->getSettingFromFullName('classes.login'));
+		$mytime = time();
+		if(isset($_COOKIE["phpmywhssession"])) {
+			$sessionCode = $_COOKIE["phpmywhssession"];
+			$sessionCode = $db->sanitize($sessionCode);
+			$newSessionCode = $login->getNewSessionCode(null,null,$sessionCode);
+		}
+		else if((isset($_GET["doLogin"]))&&(isset($_POST["usr"]))&&(isset($_POST["pwd"]))) {
+			if((!is_null($_GET["doLogin"]))&&(!is_null($_POST["usr"]))&&(!is_null($_POST["pwd"]))) {
+				if((strncmp($_GET["doLogin"],'yes',strlen('yes'))==0)&&(strlen($_POST["usr"])>0)&&(strlen($_POST["pwd"])>0)) {
+					$usr = $db->sanitize($_POST["usr"]);
+					$pwd = $db->sanitize($_POST["pwd"]);
+					$newSessionCode = $login->getNewSessionCode($usr,$pwd,null);
+				}
+			}
+		}
+		if($login->getUserLevel($newSessionCode)>=$securityLevel)
+		{
+			setcookie("phpmywhssession",$newSessionCode,time()+intval($settings->getSettingFromFullName('session.persistence'))+120*60);
+			$loggedIn = 1;
+		}
+		else {
+			setcookie("phpmywhssession",'',time()-(60*60*24*30));
+			$loggedIn = 0;
+		}
+		
 		echo "<html>\n";
 		echo "<body>\n";
-		echo "<div>\n";
-		echo "This is a quite incomplete custom application about a warehouse\n";
+		echo "<div id=\"banner\">\n";
+		echo "phpmywhs: a quite incomplete custom application about a warehouse\n";
 		echo "</div>\n";
-		$testSQL = "DROP TABLE IF EXISTS INVENTORY_ITEMS;";
-		$test = $db->execQuery($testSQL);
-		echo "<div>\n";
-		echo "$testSQL gives";
-		echo "<pre>\n";
-		echo htmlentities(var_dump($test));
-		echo "</pre>\n";
-		echo "</div>\n";
-		$testSQL = "CREATE TABLE IF NOT EXISTS INVENTORY_ITEMS (";
-		$testSQL .= "id BIGINT AUTO_INCREMENT PRIMARY KEY";
-		$testSQL .= " ,code VARCHAR(20)";
-		$testSQL .= " ,name VARCHAR(25)";
-		$testSQL .= " ,description VARCHAR(50)";
-		$testSQL .= ");";
-		$test = $db->execQuery($testSQL);
-		echo "<div>\n";
-		echo "$testSQL gives";
-		echo "<pre>\n";
-		echo htmlentities(var_dump($test));
-		echo "</pre>\n";
-		echo "</div>\n";
-		$testSQL = "INSERT INTO INVENTORY_ITEMS (code,name,description) VALUES (";
-		$testSQL .= " '123456A01b01'";
-		$testSQL .= " ,'test'";
-		$testSQL .= " ,'test01'";
-		$testSQL .= ");";
-		$test = $db->execQuery($testSQL);
-		echo "<div>\n";
-		echo "$testSQL gives";
-		echo "<pre>\n";
-		echo htmlentities(var_dump($test));
-		echo "</pre>\n";
-		echo "</div>\n";
-		$testSQL = "INSERT INTO INVENTORY_ITEMS (code,name,description) VALUES (";
-		$testSQL .= " '123456A02b02'";
-		$testSQL .= " ,'testb'";
-		$testSQL .= " ,'test02'";
-		$testSQL .= ");";
-		$test = $db->execQuery($testSQL);
-		echo "<div>\n";
-		echo "$testSQL gives";
-		echo "<pre>\n";
-		echo htmlentities(var_dump($test));
-		echo "</pre>\n";
-		echo "</div>\n";
-		$testSQL = "SELECT * FROM INVENTORY_ITEMS;";
-		$test = $db->execQuery($testSQL);
-		echo "<div>\n";
-		echo "$testSQL gives";
-		echo "<pre>\n";
-		echo htmlentities(var_dump($test));
-		echo "</pre>\n";
-		echo "</div>\n";
-		echo "<div>";
+		if($loggedIn) {
+			echo "<div id=\"menu\">\n";
+			echo "<div id=\"logout\">\n";
+			echo "Esci";
+			echo "</div>\n";
+		}
+		echo "<div id=\"body\">";
+		if($loggedIn) {
+			echo "Welcome";
+			echo "<p>" . $mytime ."</p>";
+			echo "<p>" . strftime('%Y%m%d %H%M%S',$mytime) ."</p>";
+			echo "<p>" . gmstrftime('%Y%m%d %H%M%S',$mytime) ."</p>";
+		}
+		else {
+			echo "<form method=\"post\" action=\"";
+			echo $_SERVER["PHP_SELF"];
+			echo "?doLogin=yes\"> ";
+			echo "<p>";
+			echo "User:";
+			echo "<input type=\"text\" name=\"usr\" />";
+			echo "</p>";
+			echo "<p>";
+			echo "Password:";
+			echo "<input type=\"password\" name=\"pwd\" />";
+			echo "</p>";
+			echo "<input type=\"submit\" value=\"Login\" />";
+			echo "</form>";
+		}
+		echo "</div>";
+		echo "<div id=\"footer\">";
 		echo "<p>";
 		echo "<a href=\"https://github.com/andreaboccaccio/phpmywhs\">";
 		echo "here";
 		echo "</a>"; 
-		echo "you can find the source code";
+		echo " you can find the source code";
 		echo "</p>";
 		echo "</div>";
 		echo "</body>\n";

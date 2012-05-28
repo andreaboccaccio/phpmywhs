@@ -20,34 +20,8 @@
  * along with phpmywhs. If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-class Php_AndreaBoccaccio_Db_DbVoid extends Php_AndreaBoccaccio_Db_DbAbstract {
+interface Php_AndreaBoccaccio_Login_LoginInterface {
+	public function getNewSessionCode($usr, $pwd, $code);
 	
-	private static $instance = null;
-	
-	private function __clone() {
-	
-	}
-	
-	private function __construct() {
-		$this->setKind('void');
-	}
-	
-	public static function getInstance() {
-		if(self::$instance == null) {
-			self::$instance = new Php_AndreaBoccaccio_Db_DbVoid();
-		}
-		return self::$instance;
-	}
-	
-	public function execQuery($strSQL) {
-		return '';
-	}
-	
-	public function closeConnection() {
-		return TRUE;
-	}
-	
-	public function sanitize($str) {
-		return '';
-	}
+	public function getUserLevel($code);
 }

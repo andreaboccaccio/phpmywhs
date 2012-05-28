@@ -24,4 +24,6 @@ interface Php_AndreaBoccaccio_Db_DbInterface {
 	public function execQuery($strSQL);
 	
 	public function closeConnection();
+	
+	public function sanitize($str);
 }

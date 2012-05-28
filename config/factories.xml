@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE factories>
+<factories>
+	<factory id="db">
+		<class default="yes" id="Php_AndreaBoccaccio_Db_DbNull" />
+		<class default="no" id="Php_AndreaBoccaccio_Db_DbVoid" />
+		<class default="no" id="Php_AndreaBoccaccio_Db_DbVerySimpleMySql" />
+	</factory>
+	<factory id="login">
+		<class default="yes" id="Php_AndreaBoccaccio_Login_LoginNull" />
+		<class default="no" id="Php_AndreaBoccaccio_Login_LoginVoid" />
+		<class default="no" id="Php_AndreaBoccaccio_Login_LoginRandom" />
+	</factory>
+</factories>
