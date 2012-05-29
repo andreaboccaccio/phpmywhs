@@ -43,7 +43,7 @@ class Php_AndreaBoccaccio_View_ViewMain extends Php_AndreaBoccaccio_View_ViewCon
 		$ret = parent::getMenu();
 		
 		$ret .= "<div id=\"tipoDocumento\" class=\"menuentry\">\n";
-		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=documentKindMain\">Tipo Documento</a>";
+		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=docKindList\">Tipo Documento</a>";
 		$ret .= "</div>\n";
 		$ret .= "</div>\n";
 		

@@ -46,7 +46,7 @@ class Php_AndreaBoccaccio_View_ViewDocumentKind extends Php_AndreaBoccaccio_View
 		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=main\">Principale</a>";
 		$ret .= "</div>\n";
 		$ret .= "<div id=\"tipoDocumento\" class=\"menuentry\">\n";
-		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=documentKindMain\">Lista Tipi Documenti</a>";
+		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=docKindList\">Lista Tipi Documenti</a>";
 		$ret .= "</div>\n";
 		$ret .= "</div>\n";
 

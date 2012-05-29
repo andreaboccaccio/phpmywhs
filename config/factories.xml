@@ -16,7 +16,7 @@
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewVoid" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewMain" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewLogin" />
-		<class default="no" id="Php_AndreaBoccaccio_View_ViewDocumentKindMain" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewDocumentKindList" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewDocumentKindInsert" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewDocumentKind" />
 	</factory>

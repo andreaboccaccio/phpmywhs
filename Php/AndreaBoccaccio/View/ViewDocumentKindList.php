@@ -20,7 +20,7 @@
  * along with phpmywhs. If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-class Php_AndreaBoccaccio_View_ViewDocumentKindMain extends Php_AndreaBoccaccio_View_ViewConsistentAbstract {
+class Php_AndreaBoccaccio_View_ViewDocumentKindList extends Php_AndreaBoccaccio_View_ViewConsistentAbstract {
 
 	private static $instance = null;
 
@@ -29,12 +29,12 @@ class Php_AndreaBoccaccio_View_ViewDocumentKindMain extends Php_AndreaBoccaccio_
 	}
 
 	private function __construct() {
-		$this->setKind('documentKindMain');
+		$this->setKind('docKindList');
 	}
 
 	public static function getInstance() {
 		if(self::$instance == null) {
-			self::$instance = new Php_AndreaBoccaccio_View_ViewDocumentKindMain();
+			self::$instance = new Php_AndreaBoccaccio_View_ViewDocumentKindList();
 		}
 		return self::$instance;
 	}
@@ -46,7 +46,7 @@ class Php_AndreaBoccaccio_View_ViewDocumentKindMain extends Php_AndreaBoccaccio_
 		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=main\">Principale</a>";
 		$ret .= "</div>\n";
 		$ret .= "<div id=\"tipoDocumento\" class=\"menuentry\">\n";
-		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=documentKindNew\">Nuovo Tipo Documento</a>";
+		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=docKindNew\">Nuovo Tipo Documento</a>";
 		$ret .= "</div>\n";
 		$ret .= "</div>\n";
 

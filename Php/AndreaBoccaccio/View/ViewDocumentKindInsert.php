@@ -29,7 +29,7 @@ class Php_AndreaBoccaccio_View_ViewDocumentKindInsert extends Php_AndreaBoccacci
 	}
 
 	private function __construct() {
-		$this->setKind('documentKindNew');
+		$this->setKind('docKindNew');
 	}
 
 	public static function getInstance() {
@@ -46,7 +46,7 @@ class Php_AndreaBoccaccio_View_ViewDocumentKindInsert extends Php_AndreaBoccacci
 		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=main\">Principale</a>";
 		$ret .= "</div>\n";
 		$ret .= "<div id=\"tipoDocumento\" class=\"menuentry\">\n";
-		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=documentKindMain\">Lista Tipi Documenti</a>";
+		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=docKindList\">Lista Tipi Documenti</a>";
 		$ret .= "</div>\n";
 		$ret .= "</div>\n";
 
@@ -73,7 +73,7 @@ class Php_AndreaBoccaccio_View_ViewDocumentKindInsert extends Php_AndreaBoccacci
 		$ret .= "<div id=\"body\">";
 		$ret .= "<form method=\"post\" action=\"";
 		$ret .= $_SERVER["PHP_SELF"];
-		$ret .= "?op=documentKindNew&toDo=save\"> ";
+		$ret .= "?op=docKindNew&toDo=save\"> ";
 		$ret .= "<div class=\"label\">Codice:</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"code\" />";

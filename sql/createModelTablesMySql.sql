@@ -678,7 +678,10 @@ CREATE TABLE IF NOT EXISTS WAREHOUSE (id BIGINT AUTO_INCREMENT PRIMARY KEY
 ,code VARCHAR(20) NOT NULL
 ,name VARCHAR(20)
 ,description VARCHAR(255)
-,address BIGINT
+,street VARCHAR(50)
+,zip VARCHAR(10)
+,province VARCHAR(20)
+,country VARCHAR(20)
 );
 
 CREATE TABLE IF NOT EXISTS WAREHOUSE_LOG (id BIGINT AUTO_INCREMENT PRIMARY KEY
@@ -689,7 +692,10 @@ CREATE TABLE IF NOT EXISTS WAREHOUSE_LOG (id BIGINT AUTO_INCREMENT PRIMARY KEY
 ,code VARCHAR(20) NOT NULL
 ,name VARCHAR(20)
 ,description VARCHAR(255)
-,address BIGINT
+,street VARCHAR(50)
+,zip VARCHAR(10)
+,province VARCHAR(20)
+,country VARCHAR(20)
 );
 
 CREATE TRIGGER TRG_WAREHOUSE_INSERT_AFT AFTER INSERT
@@ -703,7 +709,10 @@ INSERT INTO WAREHOUSE_LOG (
 	,code
 	,name
 	,description
-	,address
+	,street
+	,zip
+	,province
+	,country
 ) VALUES (
 	UTC_TIMESTAMP()
 	,UTC_TIMESTAMP()
@@ -712,7 +721,10 @@ INSERT INTO WAREHOUSE_LOG (
 	,NEW.code
 	,NEW.name
 	,NEW.description
-	,NEW.address
+	,NEW.street
+	,NEW.zip
+	,NEW.province
+	,NEW.country
 );
 
 delimiter |
@@ -736,7 +748,10 @@ INSERT INTO WAREHOUSE_LOG (
 	,code
 	,name
 	,description
-	,address
+	,street
+	,zip
+	,province
+	,country
 ) VALUES (
 	UTC_TIMESTAMP()
 	,UTC_TIMESTAMP()
@@ -745,7 +760,10 @@ INSERT INTO WAREHOUSE_LOG (
 	,NEW.code
 	,NEW.name
 	,NEW.description
-	,NEW.address
+	,NEW.street
+	,NEW.zip
+	,NEW.province
+	,NEW.country
 );
 END;
 
@@ -770,7 +788,10 @@ INSERT INTO WAREHOUSE_LOG (
 	,code
 	,name
 	,description
-	,address
+	,street
+	,zip
+	,province
+	,country
 ) VALUES (
 	UTC_TIMESTAMP()
 	,UTC_TIMESTAMP()
@@ -779,7 +800,10 @@ INSERT INTO WAREHOUSE_LOG (
 	,OLD.code
 	,OLD.name
 	,OLD.description
-	,OLD.address
+	,OLD.street
+	,OLD.zip
+	,OLD.province
+	,OLD.country
 );
 END;
 
@@ -1106,7 +1130,7 @@ CREATE TABLE IF NOT EXISTS DOCUMENT (id BIGINT AUTO_INCREMENT PRIMARY KEY
 ,year INT NOT NULL
 ,kind BIGINT NOT NULL
 ,code VARCHAR(20) NOT NULL
-,contractor BIGINT NOT NULL
+,contractor BIGINT
 ,warehouse BIGINT NOT NULL
 ,date VARCHAR(10)
 ,vt_start DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'
@@ -1123,7 +1147,7 @@ CREATE TABLE IF NOT EXISTS DOCUMENT_LOG (id BIGINT AUTO_INCREMENT PRIMARY KEY
 ,year INT NOT NULL
 ,kind BIGINT NOT NULL
 ,code VARCHAR(20) NOT NULL
-,contractor BIGINT NOT NULL
+,contractor BIGINT
 ,warehouse BIGINT NOT NULL
 ,date VARCHAR(10)
 ,vt_start DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'
@@ -1257,15 +1281,17 @@ END;
 delimiter ;
 
 CREATE TABLE IF NOT EXISTS CONTRACTOR (id BIGINT AUTO_INCREMENT PRIMARY KEY
-,kind BIGINT NOT NULL
-,code VARCHAR(20) NOT NULL
-,name VARCHAR(50) NOT NULL
-,address BIGINT NOT NULL
+,kind VARCHAR(20) NOT NULL
+,code VARCHAR(20)
+,name VARCHAR(50)
+,street VARCHAR(50)
+,zip VARCHAR(10)
+,province VARCHAR(20)
+,country VARCHAR(20)
 ,mainphone VARCHAR(25)
 ,mainemail VARCHAR(255)
 ,mainwebsite VARCHAR(255)
 ,description VARCHAR(255)
-,CONSTRAINT UNIQUE(kind,code)
 );
 
 CREATE TABLE IF NOT EXISTS CONTRACTOR_LOG (id BIGINT AUTO_INCREMENT PRIMARY KEY
@@ -1273,10 +1299,13 @@ CREATE TABLE IF NOT EXISTS CONTRACTOR_LOG (id BIGINT AUTO_INCREMENT PRIMARY KEY
 ,utctt_end DATETIME NOT NULL
 ,opcode VARCHAR(3) NOT NULL DEFAULT 'UNK'
 ,idorig BIGINT NOT NULL
-,kind BIGINT NOT NULL
-,code VARCHAR(20) NOT NULL
-,name VARCHAR(50) NOT NULL
-,address BIGINT NOT NULL
+,kind VARCHAR(20) NOT NULL
+,code VARCHAR(20)
+,name VARCHAR(50)
+,street VARCHAR(50)
+,zip VARCHAR(10)
+,province VARCHAR(20)
+,country VARCHAR(20)
 ,mainphone VARCHAR(25)
 ,mainemail VARCHAR(255)
 ,mainwebsite VARCHAR(255)
@@ -1294,7 +1323,10 @@ INSERT INTO CONTRACTOR_LOG (
 	,kind
 	,code
 	,name
-	,address
+	,street
+	,zip
+	,province
+	,country
 	,mainphone
 	,mainemail
 	,mainwebsite
@@ -1307,7 +1339,10 @@ INSERT INTO CONTRACTOR_LOG (
 	,NEW.kind
 	,NEW.code
 	,NEW.name
-	,NEW.address
+	,NEW.street
+	,NEW.zip
+	,NEW.province
+	,NEW.country
 	,NEW.mainphone
 	,NEW.mainemail
 	,NEW.mainwebsite
@@ -1335,7 +1370,10 @@ INSERT INTO CONTRACTOR_LOG (
 	,kind
 	,code
 	,name
-	,address
+	,street
+	,zip
+	,province
+	,country
 	,mainphone
 	,mainemail
 	,mainwebsite
@@ -1348,7 +1386,10 @@ INSERT INTO CONTRACTOR_LOG (
 	,NEW.kind
 	,NEW.code
 	,NEW.name
-	,NEW.address
+	,NEW.street
+	,NEW.zip
+	,NEW.province
+	,NEW.country
 	,NEW.mainphone
 	,NEW.mainemail
 	,NEW.mainwebsite
@@ -1377,7 +1418,10 @@ INSERT INTO CONTRACTOR_LOG (
 	,kind
 	,code
 	,name
-	,address
+	,street
+	,zip
+	,province
+	,country
 	,mainphone
 	,mainemail
 	,mainwebsite
@@ -1390,7 +1434,10 @@ INSERT INTO CONTRACTOR_LOG (
 	,OLD.kind
 	,OLD.code
 	,OLD.name
-	,OLD.address
+	,OLD.street
+	,OLD.zip
+	,OLD.province
+	,OLD.country
 	,OLD.mainphone
 	,OLD.mainemail
 	,OLD.mainwebsite
@@ -1404,10 +1451,9 @@ delimiter ;
 
 CREATE TABLE IF NOT EXISTS ITEM (id BIGINT AUTO_INCREMENT PRIMARY KEY
 ,kind BIGINT NOT NULL
-,code VARCHAR(20) NOT NULL
+,code VARCHAR(20)
 ,name VARCHAR(50)
 ,description VARCHAR(255)
-,address BIGINT
 );
 
 CREATE TABLE IF NOT EXISTS ITEM_LOG (id BIGINT AUTO_INCREMENT PRIMARY KEY
@@ -1466,7 +1512,6 @@ INSERT INTO ITEM_LOG (
 	,code
 	,name
 	,description
-	,address
 ) VALUES (
 	UTC_TIMESTAMP()
 	,UTC_TIMESTAMP()
@@ -1476,7 +1521,6 @@ INSERT INTO ITEM_LOG (
 	,NEW.code
 	,NEW.name
 	,NEW.description
-	,NEW.address
 );
 END;
 
