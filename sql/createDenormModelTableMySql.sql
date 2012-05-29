@@ -187,3 +187,132 @@ END;
 |
 
 delimiter ;
+
+CREATE TABLE IF NOT EXISTS ITEM_DENORM (id BIGINT AUTO_INCREMENT PRIMARY KEY
+,document_denorm BIGINT NOT NULL
+,kind VARCHAR(50) NOT NULL
+,code VARCHAR(20)
+,name VARCHAR(50)
+,qty INT
+,description VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS ITEM_DENORM_LOG (id BIGINT AUTO_INCREMENT PRIMARY KEY
+,utctt_start DATETIME NOT NULL
+,utctt_end DATETIME NOT NULL
+,opcode VARCHAR(3) NOT NULL DEFAULT 'UNK'
+,idorig BIGINT NOT NULL
+,document_denorm BIGINT NOT NULL
+,kind VARCHAR(50) NOT NULL
+,code VARCHAR(20)
+,name VARCHAR(50)
+,qty INT
+,description VARCHAR(255)
+);
+
+CREATE TRIGGER TRG_ITEM_DENORM_INSERT_AFT AFTER INSERT
+ON ITEM_DENORM
+FOR EACH ROW
+INSERT INTO ITEM_DENORM_LOG (
+	utctt_start
+	,utctt_end
+	,opcode
+	,idorig
+	,document_denorm
+	,kind
+	,code
+	,name
+	,qty
+	,description
+) VALUES (
+	UTC_TIMESTAMP()
+	,UTC_TIMESTAMP()
+	,'INS'
+	,NEW.id
+	,NEW.document_denorm
+	,NEW.kind
+	,NEW.code
+	,NEW.name
+	,NEW.qty
+	,NEW.description
+);
+
+delimiter |
+
+CREATE TRIGGER TRG_ITEM_DENORM_UPDATE_BFR BEFORE UPDATE
+ON ITEM_DENORM
+FOR EACH ROW
+BEGIN
+UPDATE ITEM_DENORM_LOG SET utctt_end = UTC_TIMESTAMP()
+WHERE
+(
+	(OLD.id = idorig)
+	AND
+	(utctt_end = utctt_start)
+);
+INSERT INTO ITEM_DENORM_LOG (
+	utctt_start
+	,utctt_end
+	,opcode
+	,idorig
+	,document_denorm
+	,kind
+	,code
+	,name
+	,qty
+	,description
+) VALUES (
+	UTC_TIMESTAMP()
+	,UTC_TIMESTAMP()
+	,'UPD'
+	,NEW.id
+	,NEW.document_denorm
+	,NEW.kind
+	,NEW.code
+	,NEW.name
+	,NEW.qty
+	,NEW.description
+);
+END;
+
+|
+
+CREATE TRIGGER TRG_ITEM_DENORM_DELETE_BFR BEFORE DELETE
+ON ITEM_DENORM
+FOR EACH ROW
+BEGIN
+UPDATE ITEM_DENORM_LOG SET utctt_end = UTC_TIMESTAMP()
+WHERE
+(
+	(OLD.id = idorig)
+	AND
+	(utctt_end = utctt_start)
+);
+INSERT INTO DOCUMENT_DENORM_LOG (
+	utctt_start
+	,utctt_end
+	,opcode
+	,idorig
+	,document_denorm
+	,kind
+	,code
+	,name
+	,qty
+	,description
+) VALUES (
+	UTC_TIMESTAMP()
+	,UTC_TIMESTAMP()
+	,'DEL'
+	,OLD.id
+	,OLD.document_denorm
+	,OLD.kind
+	,OLD.code
+	,OLD.name
+	,OLD.qty
+	,OLD.description
+);
+END;
+
+|
+
+delimiter ;

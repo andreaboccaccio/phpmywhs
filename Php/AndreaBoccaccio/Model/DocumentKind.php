@@ -163,7 +163,6 @@ class Php_AndreaBoccaccio_Model_DocumentKind {
 				$strSQL .= $this->getId();
 				$strSQL .= ");";
 				$res = $db->execQuery($strSQL);
-				var_dump($res);
 				if($res["success"] == TRUE) {
 					$ret = $res["numrows"];
 				}
