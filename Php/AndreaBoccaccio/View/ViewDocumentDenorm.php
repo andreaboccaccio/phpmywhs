@@ -48,6 +48,16 @@ class Php_AndreaBoccaccio_View_ViewDocumentDenorm extends Php_AndreaBoccaccio_Vi
 		$ret .= "<div id=\"tipoDocumento\" class=\"menuentry\">\n";
 		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=docList\">Lista Documenti</a>";
 		$ret .= "</div>\n";
+		$ret .= "<div id=\"itemListNewItem\" class=\"menuentry\">\n";
+		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=itemList&docId=";
+		$ret .= $_GET["id"];
+		$ret .= "\">Articoli</a>";
+		$ret .= "</div>\n";
+		$ret .= "<div id=\"docListItem\" class=\"menuentry\">\n";
+		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=itemNew&docId=";
+		$ret .= $_GET["id"];
+		$ret .= "\">Nuovo Articolo</a>";
+		$ret .= "</div>\n";
 		$ret .= "</div>\n";
 
 		return $ret;

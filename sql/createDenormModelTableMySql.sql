@@ -189,11 +189,12 @@ END;
 delimiter ;
 
 CREATE TABLE IF NOT EXISTS ITEM_DENORM (id BIGINT AUTO_INCREMENT PRIMARY KEY
-,document_denorm BIGINT NOT NULL
+,document BIGINT NOT NULL
 ,kind VARCHAR(50) NOT NULL
 ,code VARCHAR(20)
 ,name VARCHAR(50)
 ,qty INT
+,value INT
 ,description VARCHAR(255)
 );
 
@@ -202,11 +203,12 @@ CREATE TABLE IF NOT EXISTS ITEM_DENORM_LOG (id BIGINT AUTO_INCREMENT PRIMARY KEY
 ,utctt_end DATETIME NOT NULL
 ,opcode VARCHAR(3) NOT NULL DEFAULT 'UNK'
 ,idorig BIGINT NOT NULL
-,document_denorm BIGINT NOT NULL
+,document BIGINT NOT NULL
 ,kind VARCHAR(50) NOT NULL
 ,code VARCHAR(20)
 ,name VARCHAR(50)
 ,qty INT
+,value INT
 ,description VARCHAR(255)
 );
 
@@ -218,22 +220,24 @@ INSERT INTO ITEM_DENORM_LOG (
 	,utctt_end
 	,opcode
 	,idorig
-	,document_denorm
+	,document
 	,kind
 	,code
 	,name
 	,qty
+	,value
 	,description
 ) VALUES (
 	UTC_TIMESTAMP()
 	,UTC_TIMESTAMP()
 	,'INS'
 	,NEW.id
-	,NEW.document_denorm
+	,NEW.document
 	,NEW.kind
 	,NEW.code
 	,NEW.name
 	,NEW.qty
+	,NEW.value
 	,NEW.description
 );
 
@@ -255,22 +259,24 @@ INSERT INTO ITEM_DENORM_LOG (
 	,utctt_end
 	,opcode
 	,idorig
-	,document_denorm
+	,document
 	,kind
 	,code
 	,name
 	,qty
+	,value
 	,description
 ) VALUES (
 	UTC_TIMESTAMP()
 	,UTC_TIMESTAMP()
 	,'UPD'
 	,NEW.id
-	,NEW.document_denorm
+	,NEW.document
 	,NEW.kind
 	,NEW.code
 	,NEW.name
 	,NEW.qty
+	,NEW.value
 	,NEW.description
 );
 END;
@@ -293,7 +299,7 @@ INSERT INTO DOCUMENT_DENORM_LOG (
 	,utctt_end
 	,opcode
 	,idorig
-	,document_denorm
+	,document
 	,kind
 	,code
 	,name
@@ -304,11 +310,12 @@ INSERT INTO DOCUMENT_DENORM_LOG (
 	,UTC_TIMESTAMP()
 	,'DEL'
 	,OLD.id
-	,OLD.document_denorm
+	,OLD.document
 	,OLD.kind
 	,OLD.code
 	,OLD.name
 	,OLD.qty
+	,OLD.value
 	,OLD.description
 );
 END;

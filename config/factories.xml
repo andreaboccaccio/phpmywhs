@@ -19,5 +19,8 @@
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewDocumentDenormList" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewDocumentDenormInsert" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewDocumentDenorm" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewItemDenormListSubDocument" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewItemDenormInsert" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewItemDenorm" />
 	</factory>
 </factories>
