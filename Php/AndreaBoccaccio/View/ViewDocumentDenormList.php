@@ -42,10 +42,10 @@ class Php_AndreaBoccaccio_View_ViewDocumentDenormList extends Php_AndreaBoccacci
 	public function getMenu() {
 		$ret = parent::getMenu();
 
-		$ret .= "<div id=\"docMain\" class=\"menuentry\">\n";
+		$ret .= "<div id=\"docListMain\" class=\"menuentry\">\n";
 		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=main\">Principale</a>";
 		$ret .= "</div>\n";
-		$ret .= "<div id=\"docMainNewDoc\" class=\"menuentry\">\n";
+		$ret .= "<div id=\"docListMainNewDoc\" class=\"menuentry\">\n";
 		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=docNew\">Nuovo Documento</a>";
 		$ret .= "</div>\n";
 		$ret .= "</div>\n";

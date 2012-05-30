@@ -45,8 +45,8 @@ class Php_AndreaBoccaccio_View_ViewDocumentDenormInsert extends Php_AndreaBoccac
 		$ret .= "<div id=\"docNewMain\" class=\"menuentry\">\n";
 		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=main\">Principale</a>";
 		$ret .= "</div>\n";
-		$ret .= "<div id=\"docNewDoc\" class=\"menuentry\">\n";
-		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=docList\">Lista Tipi Documenti</a>";
+		$ret .= "<div id=\"docNewDocList\" class=\"menuentry\">\n";
+		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=docList\">Lista Documenti</a>";
 		$ret .= "</div>\n";
 		$ret .= "</div>\n";
 
@@ -125,7 +125,6 @@ class Php_AndreaBoccaccio_View_ViewDocumentDenormInsert extends Php_AndreaBoccac
 		$ret .= "<div class=\"label\">Fine Validita':</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"vt_end\" />";
-		$ret .= "</div>";
 		$ret .= "</div>";
 		$ret .= "<div class=\"label\">Descrizione:</div>";
 		$ret .= "<div class=\"input\">";

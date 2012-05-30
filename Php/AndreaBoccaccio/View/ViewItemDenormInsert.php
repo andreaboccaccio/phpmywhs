@@ -42,10 +42,10 @@ class Php_AndreaBoccaccio_View_ViewItemDenormInsert extends Php_AndreaBoccaccio_
 	public function getMenu() {
 		$ret = parent::getMenu();
 
-		$ret .= "<div id=\"docNewMain\" class=\"menuentry\">\n";
+		$ret .= "<div id=\"itemNewMain\" class=\"menuentry\">\n";
 		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=main\">Principale</a>";
 		$ret .= "</div>\n";
-		$ret .= "<div id=\"itemListNewItem\" class=\"menuentry\">\n";
+		$ret .= "<div id=\"itemNewItemList\" class=\"menuentry\">\n";
 		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=itemList&docId=";
 		$ret .= $_GET["docId"];
 		$ret .= "\">Lista Articoli</a>";

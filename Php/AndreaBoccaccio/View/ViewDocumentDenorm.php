@@ -42,18 +42,18 @@ class Php_AndreaBoccaccio_View_ViewDocumentDenorm extends Php_AndreaBoccaccio_Vi
 	public function getMenu() {
 		$ret = parent::getMenu();
 
-		$ret .= "<div id=\"tipoDocumento\" class=\"menuentry\">\n";
+		$ret .= "<div id=\"docMain\" class=\"menuentry\">\n";
 		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=main\">Principale</a>";
 		$ret .= "</div>\n";
-		$ret .= "<div id=\"tipoDocumento\" class=\"menuentry\">\n";
+		$ret .= "<div id=\"docDocList\" class=\"menuentry\">\n";
 		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=docList\">Lista Documenti</a>";
 		$ret .= "</div>\n";
-		$ret .= "<div id=\"itemListNewItem\" class=\"menuentry\">\n";
+		$ret .= "<div id=\"docItemList\" class=\"menuentry\">\n";
 		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=itemList&docId=";
 		$ret .= $_GET["id"];
 		$ret .= "\">Articoli</a>";
 		$ret .= "</div>\n";
-		$ret .= "<div id=\"docListItem\" class=\"menuentry\">\n";
+		$ret .= "<div id=\"docItemNew\" class=\"menuentry\">\n";
 		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=itemNew&docId=";
 		$ret .= $_GET["id"];
 		$ret .= "\">Nuovo Articolo</a>";
@@ -169,7 +169,6 @@ class Php_AndreaBoccaccio_View_ViewDocumentDenorm extends Php_AndreaBoccaccio_Vi
 		$ret .= "<div class=\"label\">Fine Validita':</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"vt_end\" value=\"" . $docDenorm->getVtEnd() . "\" />";
-		$ret .= "</div>";
 		$ret .= "</div>";
 		$ret .= "<div class=\"label\">Descrizione:</div>";
 		$ret .= "<div class=\"input\">";

@@ -42,7 +42,7 @@ class Php_AndreaBoccaccio_View_ViewMain extends Php_AndreaBoccaccio_View_ViewCon
 	public function getMenu() {
 		$ret = parent::getMenu();
 		
-		$ret .= "<div id=\"tipoDocumento\" class=\"menuentry\">\n";
+		$ret .= "<div id=\"Documento\" class=\"menuentry\">\n";
 		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=docList\">Documento</a>";
 		$ret .= "</div>\n";
 		$ret .= "</div>\n";
@@ -55,10 +55,10 @@ class Php_AndreaBoccaccio_View_ViewMain extends Php_AndreaBoccaccio_View_ViewCon
 		$mytime = time();
 		
 		$ret .= "<div id=\"body\">";
-		$ret .= "Welcome";
-		$ret .= "<p>" . $mytime ."</p>";
+		$ret .= "Benvenuti in phpmywhs";
+		$ret .= "<p>Chiamata a time()" . $mytime ."</p>";
 		$ret .= "<p>Local server datetime " . strftime('%Y%m%d %H%M%S',$mytime) ."</p>";
-		$ret .= "<p>UTC datetime" . gmstrftime('%Y%m%d %H%M%S',$mytime) ."</p>";
+		$ret .= "<p>UTC datetime " . gmstrftime('%Y%m%d %H%M%S',$mytime) ."</p>";
 		$ret .= "</div>";
 		
 		return $ret;

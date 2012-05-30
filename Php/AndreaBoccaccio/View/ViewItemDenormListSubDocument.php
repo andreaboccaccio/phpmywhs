@@ -45,12 +45,12 @@ class Php_AndreaBoccaccio_View_ViewItemDenormListSubDocument extends Php_AndreaB
 		$ret .= "<div id=\"itemListMain\" class=\"menuentry\">\n";
 		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=main\">Principale</a>";
 		$ret .= "</div>\n";
-		$ret .= "<div id=\"itemListNewItem\" class=\"menuentry\">\n";
+		$ret .= "<div id=\"itemListDoc\" class=\"menuentry\">\n";
 		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=doc&id=";
 		$ret .= $_GET["docId"];
 		$ret .= "\">Documento</a>";
 		$ret .= "</div>\n";
-		$ret .= "<div id=\"itemListNewItem\" class=\"menuentry\">\n";
+		$ret .= "<div id=\"itemListItemNew\" class=\"menuentry\">\n";
 		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=itemNew&docId=";
 		$ret .= $_GET["docId"];
 		$ret .= "\">Nuovo Articolo</a>";
