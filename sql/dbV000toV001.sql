@@ -19,167 +19,96 @@
 -- along with phpmywhs. If not, see <http://www.gnu.org/licenses/>.
 -- 
 --
-CREATE TABLE IF NOT EXISTS DOCUMENT_DENORM (id BIGINT AUTO_INCREMENT PRIMARY KEY
-,year VARCHAR(4) NOT NULL
-,kind VARCHAR(50) NOT NULL
-,code VARCHAR(20)
-,contractor_kind VARCHAR(50)
-,contractor_code VARCHAR(25)
-,contractor VARCHAR(50)
-,warehouse VARCHAR(50)
-,date VARCHAR(10)
-,vt_start DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'
-,vt_end DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'
+
+CREATE TABLE IF NOT EXISTS DBVERSION (id BIGINT AUTO_INCREMENT PRIMARY KEY
+,version VARCHAR(4) NOT NULL
 ,description VARCHAR(255)
 );
 
-CREATE TABLE IF NOT EXISTS DOCUMENT_DENORM_LOG (id BIGINT AUTO_INCREMENT PRIMARY KEY
+CREATE TABLE IF NOT EXISTS DBVERSION_LOG (id BIGINT AUTO_INCREMENT PRIMARY KEY
 ,utctt_start DATETIME NOT NULL
 ,utctt_end DATETIME NOT NULL
 ,opcode VARCHAR(3) NOT NULL DEFAULT 'UNK'
 ,idorig BIGINT NOT NULL
-,year VARCHAR(4) NOT NULL
-,kind VARCHAR(50) NOT NULL
-,code VARCHAR(20)
-,contractor_kind VARCHAR(50)
-,contractor_code VARCHAR(25)
-,contractor VARCHAR(50)
-,warehouse VARCHAR(50)
-,date VARCHAR(10)
-,vt_start DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'
-,vt_end DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'
+,version VARCHAR(4) NOT NULL
 ,description VARCHAR(255)
 );
 
-CREATE TRIGGER TRG_DOCUMENT_DENORM_INSERT_AFT AFTER INSERT
-ON DOCUMENT_DENORM
+CREATE TRIGGER TRG_DBVERSION_INSERT_AFT AFTER INSERT
+ON DBVERSION
 FOR EACH ROW
-INSERT INTO DOCUMENT_DENORM_LOG (
+INSERT INTO DBVERSION_LOG (
 	utctt_start
 	,utctt_end
 	,opcode
 	,idorig
-	,year
-	,kind
-	,code
-	,contractor_kind
-	,contractor_code
-	,contractor
-	,warehouse
-	,date
-	,vt_start
-	,vt_end
+	,version
 	,description
 ) VALUES (
 	UTC_TIMESTAMP()
 	,UTC_TIMESTAMP()
 	,'INS'
 	,NEW.id
-	,NEW.year
-	,NEW.kind
-	,NEW.code
-	,NEW.contractor_kind
-	,NEW.contractor_code
-	,NEW.contractor
-	,NEW.warehouse
-	,NEW.date
-	,NEW.vt_start
-	,NEW.vt_end
+	,NEW.version
 	,NEW.description
 );
 
 delimiter |
 
-CREATE TRIGGER TRG_DOCUMENT_DENORM_UPDATE_BFR BEFORE UPDATE
-ON DOCUMENT_DENORM
+CREATE TRIGGER TRG_DBVERSION_UPDATE_BFR BEFORE UPDATE
+ON DBVERSION
 FOR EACH ROW
 BEGIN
-UPDATE DOCUMENT_DENORM_LOG SET utctt_end = UTC_TIMESTAMP()
+UPDATE DBVERSION_LOG SET utctt_end = UTC_TIMESTAMP()
 WHERE
 (
 	(OLD.id = idorig)
 	AND
 	(utctt_end = utctt_start)
 );
-INSERT INTO DOCUMENT_DENORM_LOG (
+INSERT INTO DBVERSION_LOG (
 	utctt_start
 	,utctt_end
 	,opcode
 	,idorig
-	,year
-	,kind
-	,code
-	,contractor_kind
-	,contractor_code
-	,contractor
-	,warehouse
-	,date
-	,vt_start
-	,vt_end
+	,version
 	,description
 ) VALUES (
 	UTC_TIMESTAMP()
 	,UTC_TIMESTAMP()
 	,'UPD'
 	,NEW.id
-	,NEW.year
-	,NEW.kind
-	,NEW.code
-	,NEW.contractor_kind
-	,NEW.contractor_code
-	,NEW.contractor
-	,NEW.warehouse
-	,NEW.date
-	,NEW.vt_start
-	,NEW.vt_end
+	,NEW.version
 	,NEW.description
 );
 END;
 
 |
 
-CREATE TRIGGER TRG_DOCUMENT_DENORM_DELETE_BFR BEFORE DELETE
-ON DOCUMENT_DENORM
+CREATE TRIGGER TRG_DBVERSION_DELETE_BFR BEFORE DELETE
+ON DBVERSION
 FOR EACH ROW
 BEGIN
-UPDATE DOCUMENT_DENORM_LOG SET utctt_end = UTC_TIMESTAMP()
+UPDATE DBVERSION_LOG SET utctt_end = UTC_TIMESTAMP()
 WHERE
 (
 	(OLD.id = idorig)
 	AND
 	(utctt_end = utctt_start)
 );
-INSERT INTO DOCUMENT_DENORM_LOG (
+INSERT INTO DBVERSION_LOG (
 	utctt_start
 	,utctt_end
 	,opcode
 	,idorig
-	,year
-	,kind
-	,code
-	,contractor_kind
-	,contractor_code
-	,contractor
-	,warehouse
-	,date
-	,vt_start
-	,vt_end
+	,version
 	,description
 ) VALUES (
 	UTC_TIMESTAMP()
 	,UTC_TIMESTAMP()
 	,'DEL'
 	,OLD.id
-	,OLD.year
-	,OLD.kind
-	,OLD.code
-	,OLD.contractor_kind
-	,OLD.contractor_code
-	,OLD.contractor
-	,OLD.warehouse
-	,OLD.date
-	,OLD.vt_start
-	,OLD.vt_end
+	,OLD.version
 	,OLD.description
 );
 END;
@@ -188,33 +117,19 @@ END;
 
 delimiter ;
 
-CREATE TABLE IF NOT EXISTS ITEM_DENORM (id BIGINT AUTO_INCREMENT PRIMARY KEY
-,document BIGINT NOT NULL
-,kind VARCHAR(50) NOT NULL
-,code VARCHAR(50)
-,name VARCHAR(50)
-,qty INT
-,value INT
-,cost DECIMAL(12,2)
-,price DECIMAL(12,2)
-,description VARCHAR(255)
-);
+INSERT INTO DBVERSION (version) VALUES ('001');
 
-CREATE TABLE IF NOT EXISTS ITEM_DENORM_LOG (id BIGINT AUTO_INCREMENT PRIMARY KEY
-,utctt_start DATETIME NOT NULL
-,utctt_end DATETIME NOT NULL
-,opcode VARCHAR(3) NOT NULL DEFAULT 'UNK'
-,idorig BIGINT NOT NULL
-,document BIGINT NOT NULL
-,kind VARCHAR(50) NOT NULL
-,code VARCHAR(50)
-,name VARCHAR(50)
-,qty INT
-,value INT
-,cost DECIMAL(12,2)
-,price DECIMAL(12,2)
-,description VARCHAR(255)
-);
+DROP TRIGGER IF EXISTS TRG_ITEM_DENORM_INSERT_AFT;
+DROP TRIGGER IF EXISTS TRG_ITEM_DENORM_UPDATE_BFR;
+DROP TRIGGER IF EXISTS TRG_ITEM_DENORM_DELETE_BFR;
+
+ALTER TABLE ITEM_DENORM MODIFY COLUMN code VARCHAR(50);
+ALTER TABLE ITEM_DENORM_LOG MODIFY COLUMN code VARCHAR(50);
+
+ALTER TABLE ITEM_DENORM ADD COLUMN cost DECIMAL(12,2) AFTER value;
+ALTER TABLE ITEM_DENORM ADD COLUMN price DECIMAL(12,2) AFTER cost;
+ALTER TABLE ITEM_DENORM_LOG ADD COLUMN cost DECIMAL(12,2) AFTER value;
+ALTER TABLE ITEM_DENORM_LOG ADD COLUMN price DECIMAL(12,2) AFTER cost;
 
 CREATE TRIGGER TRG_ITEM_DENORM_INSERT_AFT AFTER INSERT
 ON ITEM_DENORM
