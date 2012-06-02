@@ -251,8 +251,8 @@ class Php_AndreaBoccaccio_Login_LoginRandom extends Php_AndreaBoccaccio_Login_Lo
 		$strSQL = '';
 		
 		if($code != null) {
-			$strSQL = "DELETE FROM USER SESSION ";
-			$strSQL .= " WHERE (S.code='";
+			$strSQL = "DELETE FROM SESSION ";
+			$strSQL .= " WHERE (code='";
 			$strSQL .= $code;
 			$strSQL .= "');";
 			$res = $db->execQuery($strSQL);

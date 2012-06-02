@@ -42,4 +42,7 @@ config/factories.xml
 <session>
 <persistence>120</persistence>
 </session>
+<memory>
+<rowPerPage>20</rowPerPage>
+</memory>
 </config>
