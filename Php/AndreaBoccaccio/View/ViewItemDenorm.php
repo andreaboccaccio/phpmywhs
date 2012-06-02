@@ -97,7 +97,9 @@ class Php_AndreaBoccaccio_View_ViewItemDenorm extends Php_AndreaBoccaccio_View_V
 							,$db->sanitize($_POST["code"])
 							,$db->sanitize($_POST["name"])
 							,$db->sanitize($_POST["qty"])
-							,$db->sanitize($_POST["value"])
+							,0
+							,$db->sanitize(str_replace(",", ".", $_POST["cost"]))
+							,$db->sanitize(str_replace(",", ".", $_POST["price"]))
 							,$db->sanitize($_POST["description"])
 							);
 					$itemDenorm->saveToDb();
@@ -129,27 +131,31 @@ class Php_AndreaBoccaccio_View_ViewItemDenorm extends Php_AndreaBoccaccio_View_V
 		$ret .= "<div class=\"label\">Categoria:</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"kind\" value=\"" . $itemDenorm->getKind() . "\" />";
-		$ret .= "</div>";
+		$ret .= "</div><br />";
 		$ret .= "<div class=\"label\">Codice:</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"code\" value=\"" . $itemDenorm->getCode() . "\" />";
-		$ret .= "</div>";
+		$ret .= "</div><br />";
 		$ret .= "<div class=\"label\">Nome:</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"name\" value=\"" . $itemDenorm->getName() . "\" />";
-		$ret .= "</div>";
+		$ret .= "</div><br />";
 		$ret .= "<div class=\"label\">Quantita':</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"qty\" value=\"" . $itemDenorm->getQty() . "\" />";
-		$ret .= "</div>";
-		$ret .= "<div class=\"label\">Valore:</div>";
+		$ret .= "</div><br />";
+		$ret .= "<div class=\"label\">Costo:</div>";
 		$ret .= "<div class=\"input\">";
-		$ret .= "<input type=\"text\" name=\"value\" value=\"" . $itemDenorm->getValue() . "\" />";
-		$ret .= "</div>";
+		$ret .= "<input type=\"text\" name=\"cost\" value=\"" . number_format($itemDenorm->getCost(),2,',','') . "\" />";
+		$ret .= "</div><br />";
+		$ret .= "<div class=\"label\">Prezzo:</div>";
+		$ret .= "<div class=\"input\">";
+		$ret .= "<input type=\"text\" name=\"price\" value=\"" . number_format($itemDenorm->getPrice(),2,',','') . "\" />";
+		$ret .= "</div><br />";
 		$ret .= "<div class=\"label\">Descrizione:</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"description\" value=\"" . $itemDenorm->getDescription() . "\" />";
-		$ret .= "</div>";
+		$ret .= "</div><br />";
 		$ret .= "<div class=\"submit\">";
 		if($eraser) {
 			$ret .= "<input type=\"submit\" value=\"Si, sono sicuro, cancella!\" />";

@@ -30,13 +30,15 @@ class Php_AndreaBoccaccio_Model_ItemDenormManager {
 			,$name = null
 			,$qty = null
 			,$value = null
+			,$cost = null
+			,$price = null
 			,$description = null
 			,$orderby = null
 			) {
 		$tmpItemDenorm;
 		$tmpRow;
 		$i = -1;
-		$where = -1;
+		$where = 0;
 		$setting = Php_AndreaBoccaccio_Settings_SettingsFactory::getInstance()->getSettings('xml');
 		$db = Php_AndreaBoccaccio_Db_DbFactory::getInstance()->getDb($setting->getSettingFromFullName('classes.db'));
 		$strSQL = "SELECT * FROM ITEM_DENORM";
@@ -46,6 +48,8 @@ class Php_AndreaBoccaccio_Model_ItemDenormManager {
 				||($name != null)
 				||($qty != null)
 				||($value != null)
+				||($cost != null)
+				||($price != null)
 				||($description != null)
 				) {
 			$strSQL .= " WHERE (";
@@ -56,64 +60,82 @@ class Php_AndreaBoccaccio_Model_ItemDenormManager {
 				$strSQL .= ")";
 				++$where;
 			}
-			if($where > 0) {
-				$strSQL .= " AND ";
-			}
 			if($kind != null) {
 				if(strlen($kind) > 0) {
+					if($where > 0) {
+						$strSQL .= " AND ";
+					}
 					$strSQL .= "(kind LIKE '%";
 					$strSQL .= $kind;
 					$strSQL .= "%')";
 					++$where;
 				}
 			}
-			if($where > 0) {
-				$strSQL .= " AND ";
-			}
 			if($code != null) {
 				if(strlen($code) > 0) {
+					if($where > 0) {
+						$strSQL .= " AND ";
+					}
 					$strSQL .= "(code LIKE '%";
 					$strSQL .= $code;
 					$strSQL .= "%')";
 					++$where;
 				}
 			}
-			if($where > 0) {
-				$strSQL .= " AND ";
-			}
 			if($name != null) {
 				if(strlen($name) > 0) {
+					if($where > 0) {
+						$strSQL .= " AND ";
+					}
 					$strSQL .= "(name LIKE '%";
 					$strSQL .= $name;
 					$strSQL .= "%')";
 					++$where;
 				}
 			}
-			if($where > 0) {
-				$strSQL .= " AND ";
-			}
 			if($qty != null) {
 				if(intval($qty) != 0) {
+					if($where > 0) {
+						$strSQL .= " AND ";
+					}
 					$strSQL .= "(qty = ";
 					$strSQL .= intval($qty);
 					$strSQL .= ")";
 					++$where;
 				}
 			}
-			if($where > 0) {
-				$strSQL .= " AND ";
-			}
 			if($value != null) {
+				if($where > 0) {
+					$strSQL .= " AND ";
+				}
 				$strSQL .= "(value = ";
-				$strSQL .= intval($qty);
+				$strSQL .= intval($value);
 				$strSQL .= ")";
 				++$where;
 			}
-			if($where > 0) {
-				$strSQL .= " AND ";
+			if($cost != null) {
+				if($where > 0) {
+					$strSQL .= " AND ";
+				}
+				$strSQL .= "(cost = ";
+				$strSQL .= floatval($cost);
+				$strSQL .= ")";
+				++$where;
+			}
+			if($price != null) {
+				if($where > 0) {
+					$strSQL .= " AND ";
+				}
+				$strSQL .= "(price = ";
+				$strSQL .= floatval($price);
+				$strSQL .= ")";
+				++$where;
 			}
 			if($description != null) {
 				if(strlen($description) > 0) {
+					if($where > 0) {
+						$strSQL .= " AND ";
+					}
 					$strSQL .= "(description LIKE '%";
 					$strSQL .= $description;
 					$strSQL .= "%')";
@@ -140,6 +162,8 @@ class Php_AndreaBoccaccio_Model_ItemDenormManager {
 							,$tmpRow["name"]
 							,intval($tmpRow["qty"])
 							,intval($tmpRow["value"])
+							,floatval($tmpRow["cost"])
+							,floatval($tmpRow["price"])
 							,$tmpRow["description"]
 							);
 					$this->itemDenormArray[$i] = $tmpItemDenorm;

@@ -29,6 +29,8 @@ class Php_AndreaBoccaccio_Model_ItemDenorm {
 	private $name = '';
 	private $qty = -1;
 	private $value = -1;
+	private $cost = -1.0;
+	private $price = -1.0;
 	private $description = '';
 	private $changed = FALSE;
 
@@ -98,6 +100,24 @@ class Php_AndreaBoccaccio_Model_ItemDenorm {
 			$this->changed = TRUE;
 		}
 	}
+	public function getCost() {
+		return $this->cost;
+	}
+	public function setCost($cost) {
+		if($this->cost != floatval($cost)) {
+			$this->cost = floatval($cost);
+			$this->changed = TRUE;
+		}
+	}
+	public function getPrice() {
+		return $this->price;
+	}
+	public function setPrice($price) {
+		if($this->price != floatval($price)) {
+			$this->price = floatval($price);
+			$this->changed = TRUE;
+		}
+	}
 	public function getDescription() {
 		return $this->description;
 	}
@@ -114,6 +134,8 @@ class Php_AndreaBoccaccio_Model_ItemDenorm {
 			,$name
 			,$qty
 			,$value
+			,$cost
+			,$price
 			,$description) {
 		$this->setId($id);
 		$this->setDocument($document);
@@ -122,6 +144,8 @@ class Php_AndreaBoccaccio_Model_ItemDenorm {
 		$this->setName($name);
 		$this->setQty($qty);
 		$this->setValue($value);
+		$this->setCost($cost);
+		$this->setPrice($price);
 		$this->setDescription($description);
 	}
 		
@@ -151,6 +175,8 @@ class Php_AndreaBoccaccio_Model_ItemDenorm {
 							,$tmpRow["name"]
 							,$tmpRow["qty"]
 							,$tmpRow["value"]
+							,$tmpRow["cost"]
+							,$tmpRow["price"]
 							,$tmpRow["description"]
 							);
 				}
@@ -186,7 +212,16 @@ class Php_AndreaBoccaccio_Model_ItemDenorm {
 				$newObj = 1;
 			}
 			if($newObj) {
-				$strSQL = "INSERT INTO ITEM_DENORM (document,kind,code,name,qty,value,description) ";
+				$strSQL = "INSERT INTO ITEM_DENORM (";
+				$strSQL .= "document";
+				$strSQL .= ",kind";
+				$strSQL .= ",code";
+				$strSQL .= ",name";
+				$strSQL .= ",qty";
+				$strSQL .= ",value";
+				$strSQL .= ",cost";
+				$strSQL .= ",price";
+				$strSQL .= ",description) ";
 				$strSQL .= "VALUES ('";
 				$strSQL .= $this->getDocument();
 				$strSQL .= "', '";
@@ -199,6 +234,10 @@ class Php_AndreaBoccaccio_Model_ItemDenorm {
 				$strSQL .= $this->getQty();
 				$strSQL .= "', '";
 				$strSQL .= $this->getValue();
+				$strSQL .= "', '";
+				$strSQL .= $this->getCost();
+				$strSQL .= "', '";
+				$strSQL .= $this->getPrice();
 				$strSQL .= "', '";
 				$strSQL .= $this->getDescription();
 				$strSQL .= "');";
@@ -221,6 +260,10 @@ class Php_AndreaBoccaccio_Model_ItemDenorm {
 				$strSQL .= $this->getQty();
 				$strSQL .= "', value='";
 				$strSQL .= $this->getValue();
+				$strSQL .= "', cost='";
+				$strSQL .= $this->getCost();
+				$strSQL .= "', price='";
+				$strSQL .= $this->getPrice();
 				$strSQL .= "', description='";
 				$strSQL .= $this->getDescription();
 				$strSQL .= "' WHERE (id =";

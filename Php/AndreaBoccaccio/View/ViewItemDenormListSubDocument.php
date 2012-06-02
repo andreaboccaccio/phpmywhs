@@ -75,7 +75,8 @@ class Php_AndreaBoccaccio_View_ViewItemDenormListSubDocument extends Php_AndreaB
 		$ret .= "<th class=\"tab\">Codice</th>";
 		$ret .= "<th class=\"tab\">Nome</th>";
 		$ret .= "<th class=\"tab\">Quantita'</th>";
-		$ret .= "<th class=\"tab\">Valore</th>";
+		$ret .= "<th class=\"tab\">Costo u.</th>";
+		$ret .= "<th class=\"tab\">Prezzo u.</th>";
 		$ret .= "<th class=\"tab\">cancellazione</th>";
 		$ret .= "</tr>";
 		for($i = 0; $i < $max; ++$i) {
@@ -108,7 +109,13 @@ class Php_AndreaBoccaccio_View_ViewItemDenormListSubDocument extends Php_AndreaB
 			$ret .= "<a href=\"" . $_SERVER["PHP_SELF"];
 			$ret .= "?op=item&id=" . $itemDenorms[$i]->getId();
 			$ret .= "&docId=" .$itemDenorms[$i]->getDocument();
-			$ret .= "\">" . $itemDenorms[$i]->getValue() ."</a>";
+			$ret .= "\">" . number_format($itemDenorms[$i]->getCost(),2,',','') ."</a>";
+			$ret .= "</td>";
+			$ret .= "<td class=\"tab\">";
+			$ret .= "<a href=\"" . $_SERVER["PHP_SELF"];
+			$ret .= "?op=item&id=" . $itemDenorms[$i]->getId();
+			$ret .= "&docId=" .$itemDenorms[$i]->getDocument();
+			$ret .= "\">" . number_format($itemDenorms[$i]->getPrice(),2,',','') ."</a>";
 			$ret .= "</td>";
 			$ret .= "<td class=\"tab\">";
 			$ret .= "<a href=\"" . $_SERVER["PHP_SELF"];

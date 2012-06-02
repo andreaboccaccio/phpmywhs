@@ -72,7 +72,9 @@ class Php_AndreaBoccaccio_View_ViewItemDenormInsert extends Php_AndreaBoccaccio_
 							,$db->sanitize($_POST["code"])
 							,$db->sanitize($_POST["name"])
 							,$db->sanitize($_POST["qty"])
-							,$db->sanitize($_POST["value"])
+							,0
+							,$db->sanitize(str_replace(",", ".", $_POST["cost"]))
+							,$db->sanitize(str_replace(",", ".", $_POST["price"]))
 							,$db->sanitize($_POST["description"])
 							);
 					$itemDenorm->saveToDb();
@@ -88,30 +90,34 @@ class Php_AndreaBoccaccio_View_ViewItemDenormInsert extends Php_AndreaBoccaccio_
 		$ret .= "<div class=\"label\">Categoria:</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"kind\" />";
-		$ret .= "</div>";
+		$ret .= "</div><br />";
 		$ret .= "<div class=\"label\">Codice:</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"code\" />";
-		$ret .= "</div>";
+		$ret .= "</div><br />";
 		$ret .= "<div class=\"label\">Nome:</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"name\" />";
-		$ret .= "</div>";
+		$ret .= "</div><br />";
 		$ret .= "<div class=\"label\">Quantita':</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"qty\" />";
-		$ret .= "</div>";
-		$ret .= "<div class=\"label\">Valore:</div>";
+		$ret .= "</div><br />";
+		$ret .= "<div class=\"label\">Costo:</div>";
 		$ret .= "<div class=\"input\">";
-		$ret .= "<input type=\"text\" name=\"value\" />";
-		$ret .= "</div>";
+		$ret .= "<input type=\"text\" name=\"cost\" />";
+		$ret .= "</div><br />";
+		$ret .= "<div class=\"label\">Prezzo:</div>";
+		$ret .= "<div class=\"input\">";
+		$ret .= "<input type=\"text\" name=\"price\" />";
+		$ret .= "</div><br />";
 		$ret .= "<div class=\"label\">Descrizione:</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"description\" />";
-		$ret .= "</div>";
+		$ret .= "</div><br />";
 		$ret .= "<div class=\"submit\">";
 		$ret .= "<input type=\"submit\" value=\"Salva\" />";
-		$ret .= "</div>";
+		$ret .= "</div><br />";
 		$ret .= "</form>";
 		$ret .= "</div>";
 
