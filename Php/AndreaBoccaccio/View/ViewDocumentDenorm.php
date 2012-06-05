@@ -124,56 +124,67 @@ class Php_AndreaBoccaccio_View_ViewDocumentDenorm extends Php_AndreaBoccaccio_Vi
 		$ret .= "<form method=\"post\" action=\"";
 		$ret .= $_SERVER["PHP_SELF"];
 		if($eraser) {
-			$ret .= "?op=doc&toDo=erase\"> ";
+			$ret .= "?op=doc&toDo=erase&id=" . $docDenorm->getId() . "\"> ";
 		}
 		else {
-			$ret .= "?op=doc&toDo=modify\"> ";
+			$ret .= "?op=doc&toDo=modify&id=" . $docDenorm->getId() . "\"> ";
 		}
 		$ret .= "<input type=\"hidden\" name=\"docDenormId\" value=\"" . $docDenorm->getId() . "\" />";
 		$ret .= "<div class=\"label\">Anno:</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"year\" value=\"" . $docDenorm->getYear() . "\" />";
 		$ret .= "</div>";
+		$ret .= "<br />";
 		$ret .= "<div class=\"label\">Tipo Documento:</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"kind\" value=\"" . $docDenorm->getKind() . "\" />";
 		$ret .= "</div>";
+		$ret .= "<br />";
 		$ret .= "<div class=\"label\">Numero/Codice:</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"code\" value=\"" . $docDenorm->getCode() . "\" />";
 		$ret .= "</div>";
-		$ret .= "<div class=\"label\">Tipo Contraente:</div>";
-		$ret .= "<div class=\"input\">";
-		$ret .= "<input type=\"text\" name=\"contractor_kind\" value=\"" . $docDenorm->getContractorKind() . "\" />";
-		$ret .= "</div>";
-		$ret .= "<div class=\"label\">P.IVA/CF Contraente:</div>";
-		$ret .= "<div class=\"input\">";
-		$ret .= "<input type=\"text\" name=\"contractor_code\" value=\"" . $docDenorm->getContractorCode() . "\" />";
-		$ret .= "</div>";
-		$ret .= "<div class=\"label\">Contraente:</div>";
-		$ret .= "<div class=\"input\">";
-		$ret .= "<input type=\"text\" name=\"contractor\" value=\"" . $docDenorm->getContractor() . "\" />";
-		$ret .= "</div>";
-		$ret .= "<div class=\"label\">Magazzino:</div>";
-		$ret .= "<div class=\"input\">";
-		$ret .= "<input type=\"text\" name=\"warehouse\" value=\"" . $docDenorm->getWarehouse() . "\" />";
-		$ret .= "</div>";
+		$ret .= "<br />";
 		$ret .= "<div class=\"label\">Data documento:</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"date\" value=\"" . $docDenorm->getDate() . "\" />";
 		$ret .= "</div>";
+		$ret .= "<br />";
+		$ret .= "<div class=\"label\">Tipo Contraente:</div>";
+		$ret .= "<div class=\"input\">";
+		$ret .= "<input type=\"text\" name=\"contractor_kind\" value=\"" . $docDenorm->getContractorKind() . "\" />";
+		$ret .= "</div>";
+		$ret .= "<br />";
+		$ret .= "<div class=\"label\">P.IVA/CF Contraente:</div>";
+		$ret .= "<div class=\"input\">";
+		$ret .= "<input type=\"text\" name=\"contractor_code\" value=\"" . $docDenorm->getContractorCode() . "\" />";
+		$ret .= "</div>";
+		$ret .= "<br />";
+		$ret .= "<div class=\"label\">Contraente:</div>";
+		$ret .= "<div class=\"input\">";
+		$ret .= "<input type=\"text\" name=\"contractor\" value=\"" . $docDenorm->getContractor() . "\" />";
+		$ret .= "</div>";
+		$ret .= "<br />";
+		$ret .= "<div class=\"label\">Magazzino:</div>";
+		$ret .= "<div class=\"input\">";
+		$ret .= "<input type=\"text\" name=\"warehouse\" value=\"" . $docDenorm->getWarehouse() . "\" />";
+		$ret .= "</div>";
+		$ret .= "<br />";
 		$ret .= "<div class=\"label\">Inizio Validita':</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"vt_start\" value=\"" . $docDenorm->getVtStart() . "\" />";
 		$ret .= "</div>";
+		$ret .= "<br />";
 		$ret .= "<div class=\"label\">Fine Validita':</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"vt_end\" value=\"" . $docDenorm->getVtEnd() . "\" />";
 		$ret .= "</div>";
+		$ret .= "<br />";
 		$ret .= "<div class=\"label\">Descrizione:</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"description\" value=\"" . $docDenorm->getDescription() . "\" />";
 		$ret .= "</div>";
+		$ret .= "<br />";
 		$ret .= "<div class=\"submit\">";
 		if($eraser) {
 			$ret .= "<input type=\"submit\" value=\"Si, sono sicuro, cancella!\" />";
@@ -182,6 +193,7 @@ class Php_AndreaBoccaccio_View_ViewDocumentDenorm extends Php_AndreaBoccaccio_Vi
 			$ret .= "<input type=\"submit\" value=\"Modifica\" />";
 		}
 		$ret .= "</div>";
+		$ret .= "<br />";
 		$ret .= "</form>";
 		$ret .= "</div>";
 

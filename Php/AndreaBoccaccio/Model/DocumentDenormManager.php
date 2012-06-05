@@ -24,7 +24,8 @@ class Php_AndreaBoccaccio_Model_DocumentDenormManager {
 	
 	private $docDenormArray = array();
 	
-	public function getDocs($year = null
+	public function getDocs($page = 0
+			,$year = null
 			,$kind = null
 			,$code = null
 			,$contractor_kind = null
@@ -37,13 +38,25 @@ class Php_AndreaBoccaccio_Model_DocumentDenormManager {
 			,$description = null
 			,$orderby = null
 			) {
+		$ret = array();
 		$tmpDocDenorm;
 		$tmpRow;
 		$i = -1;
 		$where = 0;
 		$setting = Php_AndreaBoccaccio_Settings_SettingsFactory::getInstance()->getSettings('xml');
 		$db = Php_AndreaBoccaccio_Db_DbFactory::getInstance()->getDb($setting->getSettingFromFullName('classes.db'));
+		$rowsPerPage = $setting->getSettingFromFullName('memory.rowsPerPage');
+		$strSQLCount = "SELECT COUNT(*) AS totalRows, CEIL(COUNT(*)/";
 		$strSQL = "SELECT * FROM DOCUMENT_DENORM";
+		$strSQLOptional = '';
+		$strSQLOrderBy = '';
+		$strSQLLimit = ' LIMIT ';
+		$totalRows = -1;
+		$totalPages = -1;
+		$offset = -1;
+		
+		$rowsPerPage = strval(intval($rowsPerPage));
+		$strSQLCount .= $rowsPerPage . ") AS totalPages FROM DOCUMENT_DENORM";
 		if(($year != null)
 				||($kind != null)
 				||($code != null)
@@ -56,145 +69,194 @@ class Php_AndreaBoccaccio_Model_DocumentDenormManager {
 				||($vt_end != null)
 				||($description != null)
 				) {
-			$strSQL .= " WHERE (";
-			if($kind != null) {
-				if(strlen($kind) > 0) {
-					$strSQL .= "(kind LIKE '%";
-					$strSQL .= $kind;
-					$strSQL .= "%')";
+			$strSQLOptional .= " WHERE (";
+			if($year != null) {
+				if(strlen($year) > 0) {
+					if($where > 0) {
+						$strSQLOptional .= " AND ";
+					}
+					$strSQLOptional .= "(year COLLATE latin1_general_ci LIKE '%";
+					$strSQLOptional .= $db->sanitize($year);
+					$strSQLOptional .= "%')";
 					++$where;
 				}
 			}
-			if($where > 0) {
-				$strSQL .= " AND ";
+			if($kind != null) {
+				if(strlen($kind) > 0) {
+					if($where > 0) {
+						$strSQLOptional .= " AND ";
+					}
+					$strSQLOptional .= "(kind COLLATE latin1_general_ci LIKE '%";
+					$strSQLOptional .= $db->sanitize($kind);
+					$strSQLOptional .= "%')";
+					++$where;
+				}
 			}
 			if($code != null) {
 				if(strlen($code) > 0) {
-					$strSQL .= "(code LIKE '%";
-					$strSQL .= $code;
-					$strSQL .= "%')";
+					if($where > 0) {
+						$strSQLOptional .= " AND ";
+					}
+					$strSQLOptional .= "(code COLLATE latin1_general_ci LIKE '%";
+					$strSQLOptional .= $db->sanitize($code);
+					$strSQLOptional .= "%')";
 					++$where;
 				}
-			}
-			if($where > 0) {
-				$strSQL .= " AND ";
 			}
 			if($contractor_kind != null) {
 				if(strlen($contractor_kind) > 0) {
-					$strSQL .= "(contractor_kind LIKE '%";
-					$strSQL .= $contractor_kind;
-					$strSQL .= "%')";
+					if($where > 0) {
+						$strSQLOptional .= " AND ";
+					}
+					$strSQLOptional .= "(contractor_kind COLLATE latin1_general_ci LIKE '%";
+					$strSQLOptional .= $db->sanitize($contractor_kind);
+					$strSQLOptional .= "%')";
 					++$where;
 				}
 			}
-			if($where > 0) {
-				$strSQL .= " AND ";
-			}
+			
 			if($contractor_code != null) {
 				if(strlen($contractor_code) > 0) {
-					$strSQL .= "(contractor_code LIKE '%";
-					$strSQL .= $contractor_code;
-					$strSQL .= "%')";
+					if($where > 0) {
+						$strSQLOptional .= " AND ";
+					}
+					$strSQLOptional .= "(contractor_code COLLATE latin1_general_ci LIKE '%";
+					$strSQLOptional .= $db->sanitize($contractor_code);
+					$strSQLOptional .= "%')";
 					++$where;
 				}
-			}
-			if($where > 0) {
-				$strSQL .= " AND ";
 			}
 			if($contractor != null) {
 				if(strlen($contractor) > 0) {
-					$strSQL .= "(contractor LIKE '%";
-					$strSQL .= $contractor;
-					$strSQL .= "%')";
+					if($where > 0) {
+						$strSQLOptional .= " AND ";
+					}
+					$strSQLOptional .= "(contractor COLLATE latin1_general_ci LIKE '%";
+					$strSQLOptional .= $db->sanitize($contractor);
+					$strSQLOptional .= "%')";
 					++$where;
 				}
-			}
-			if($where > 0) {
-				$strSQL .= " AND ";
 			}
 			if($warehouse != null) {
 				if(strlen($warehouse) > 0) {
-					$strSQL .= "(warehouse LIKE '%";
-					$strSQL .= $warehouse;
-					$strSQL .= "%')";
+					if($where > 0) {
+						$strSQLOptional .= " AND ";
+					}
+					$strSQLOptional .= "(warehouse COLLATE latin1_general_ci LIKE '%";
+					$strSQLOptional .= $db->sanitize($warehouse);
+					$strSQLOptional .= "%')";
 					++$where;
 				}
-			}
-			if($where > 0) {
-				$strSQL .= " AND ";
 			}
 			if($date != null) {
 				if(strlen($date) > 0) {
-					$strSQL .= "(date LIKE '%";
-					$strSQL .= $date;
-					$strSQL .= "%')";
+					if($where > 0) {
+						$strSQL .= " AND ";
+					}
+					$strSQLOptional .= "(date COLLATE latin1_general_ci LIKE '%";
+					$strSQLOptional .= $db->sanitize($date);
+					$strSQLOptional .= "%')";
 					++$where;
 				}
-			}
-			if($where > 0) {
-				$strSQL .= " AND ";
 			}
 			if($vt_start != null) {
 				if(strlen($vt_start) > 0) {
-					$strSQL .= "(vt_start LIKE '%";
-					$strSQL .= $vt_start;
-					$strSQL .= "%')";
+					if($where > 0) {
+						$strSQLOptional .= " AND ";
+					}
+					$strSQLOptional .= "(vt_start ='";
+					$strSQLOptional .= $db->sanitize($vt_start);
+					$strSQLOptional .= "')";
 					++$where;
 				}
-			}
-			if($where > 0) {
-				$strSQL .= " AND ";
 			}
 			if($vt_end != null) {
 				if(strlen($vt_end) > 0) {
-					$strSQL .= "(vt_end LIKE '%";
-					$strSQL .= $vt_end;
-					$strSQL .= "%')";
+					if($where > 0) {
+						$strSQLOptional .= " AND ";
+					}
+					$strSQLOptional .= "(vt_end ='";
+					$strSQLOptional .= $db->sanitize($vt_end);
+					$strSQLOptional .= "')";
 					++$where;
 				}
-			}
-			if($where > 0) {
-				$strSQL .= " AND ";
 			}
 			if($description != null) {
 				if(strlen($description) > 0) {
-					$strSQL .= "(description LIKE '%";
-					$strSQL .= $description;
-					$strSQL .= "%')";
+					if($where > 0) {
+						$strSQLOptional .= " AND ";
+					}
+					$strSQLOptional .= "(description LIKE COLLATE latin1_general_ci '%";
+					$strSQLOptional .= $db->sanitize($description);
+					$strSQLOptional .= "%')";
 					++$where;
 				}
 			}
-			$srtSQL .= ")";
+			$strSQLOptional .= ")";
 		}
 		if($orderby != null) {
-			$strSQL .= " ORDER BY ";
-			$strSQL .= $orderby;
+			$strSQLOrderBy .= " ORDER BY ";
+			$strSQLOrderBy .= $orderby;
 		}
-		$strSQL .= ";";
-		$res = $db->execQuery($strSQL);
+		$strSQLCount .= $strSQLOptional . ";";
+		$res = $db->execQuery($strSQLCount);
 		if($res["success"] == TRUE) {
 			if($res["numrows"] > 0) {
-				for ($i = 0; $i < $res["numrows"]; ++$i) {
-					$tmpRow = $res["result"][$i];
-					$tmpDocDenorm = new Php_AndreaBoccaccio_Model_DocumentDenorm();
-					$tmpDocDenorm->init(intval($tmpRow["id"])
-							,$tmpRow["year"]
-							,$tmpRow["kind"]
-							,$tmpRow["code"]
-							,$tmpRow["contractor_kind"]
-							,$tmpRow["contractor_code"]
-							,$tmpRow["contractor"]
-							,$tmpRow["warehouse"]
-							,$tmpRow["date"]
-							,$tmpRow["vt_start"]
-							,$tmpRow["vt_end"]
-							,$tmpRow["description"]
-							);
-					$this->docDenormArray[$i] = $tmpDocDenorm;
-				}
+				$totalRows = intval($res["result"][0]["totalRows"]);
+				$totalPages = intval($res["result"][0]["totalPages"]);
+			}
+			else {
+				var_dump($strSQLCount);
+				var_dump($res);
 			}
 		}
-		return $this->docDenormArray;
+		else {
+			var_dump($strSQLCount);
+			var_dump($res);
+		}
+		$ret["requestedPage"] = $page;
+		$ret["rowsPerPage"] = intval($rowsPerPage);
+		$ret["totalRows"] = $totalRows;
+		$ret["totalPages"] = $totalPages;
+		if(intval($totalRows) > 0) {
+			$page = abs(intval($page))%$totalPages;
+			$offset = $page*intval($rowsPerPage);
+			$ret["actualPage"] = $page;
+			$ret["actualOffset"] = $offset;
+			$strSQLLimit .= $offset . "," . $rowsPerPage;
+			$strSQL .= $strSQLOptional . $strSQLOrderBy . $strSQLLimit . ";";
+			$res = $db->execQuery($strSQL);
+			if($res["success"] == TRUE) {
+				if($res["numrows"] > 0) {
+					for ($i = 0; $i < $res["numrows"]; ++$i) {
+						$tmpRow = $res["result"][$i];
+						$tmpDocDenorm = new Php_AndreaBoccaccio_Model_DocumentDenorm();
+						$tmpDocDenorm->init(intval($tmpRow["id"])
+								,$tmpRow["year"]
+								,$tmpRow["kind"]
+								,$tmpRow["code"]
+								,$tmpRow["contractor_kind"]
+								,$tmpRow["contractor_code"]
+								,$tmpRow["contractor"]
+								,$tmpRow["warehouse"]
+								,$tmpRow["date"]
+								,$tmpRow["vt_start"]
+								,$tmpRow["vt_end"]
+								,$tmpRow["description"]
+								);
+						$this->docDenormArray[$i] = $tmpDocDenorm;
+					}
+				}
+			}
+		$ret["result"] = $this->docDenormArray;
+		}
+		else {
+			$ret["actualPage"] = 0;
+			$ret["actualOffset"] = 0;
+			$ret["result"] = array();
+		}
+		
+		return $ret;
 	}
 	
 	public function eraseDocumentDenorm($id) {

@@ -56,10 +56,12 @@ class Php_AndreaBoccaccio_View_ViewLogin extends Php_AndreaBoccaccio_View_ViewCo
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"usr\" />";
 		$ret .= "</div>";
+		$ret .= "<br />";
 		$ret .= "<div class=\"label\">Password:</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"password\" name=\"pwd\" />";
 		$ret .= "</div>";
+		$ret .= "<br />";
 		$ret .= "<div class=\"submit\">";
 		$ret .= "<input type=\"submit\" value=\"Login\" />";
 		$ret .= "</div>";

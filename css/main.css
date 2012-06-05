@@ -7,7 +7,7 @@ div#menu {
 	background-color:#f0f0f0;
 	float:left;
 	margin:5px;
-	height:400px;
+	height:600px;
 }
 div#body {
 	margin:5px;
@@ -26,13 +26,13 @@ div#footer {
 .label {
 	float:left;
 	width:200px;
-	margin:5px;
+	margin:2px;
 }
 .input {
-	margin:5px;
+	margin:2px;
 }
 .submit {
-	margin-left:210px;
+	margin-left:204px;
 }
 .list  {
 	height:300px;
