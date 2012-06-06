@@ -41,3 +41,23 @@ div#footer {
 .tab {
 	border:1px solid black;
 }
+.firstPage {
+	float:left;
+	margin:1px;
+}
+.prevPage {
+	float:left;
+	margin:1px;
+}
+.actualPage {
+	float:left;
+	margin:1px;
+}
+.nextPage {
+	float:left;
+	margin:1px;
+}
+.lastPage {
+	float:left;
+	margin:1px;
+}

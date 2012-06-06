@@ -296,10 +296,10 @@ class Php_AndreaBoccaccio_View_ViewDocumentDenormList extends Php_AndreaBoccacci
 			$ret .= "?op=docList&page=0" . $getWherePrefix . $myGetWhere;
 			$ret .= $getOrderPrefix . $myGetOrder . "\"\">Pagina 1</a>";
 			$ret .= "</div>";
-			$ret .= "<div id=\"listDocPrevPage\" class=\"nextPrev\">";
+			$ret .= "<div id=\"listDocPrevPage\" class=\"prevPage\">";
 			$ret .= "<a href=\"" . $_SERVER["PHP_SELF"];
-			$ret .= "?op=docList&page=" . strval(abs(intval($actualPage))%intval($totalPages)) . $getWherePrefix . $myGetWhere;
-			$ret .= $getOrderPrefix . $myGetOrder . "\"\">Pagina " . strval((abs(intval($actualPage))%intval($totalPages))+1) . "</a>";
+			$ret .= "?op=docList&page=" . strval(max((intval($actualPage)-1),0)) . $getWherePrefix . $myGetWhere;
+			$ret .= $getOrderPrefix . $myGetOrder . "\"\">Pagina " . strval((max((intval($actualPage)-1),0))+1) . "</a>";
 			$ret .= "</div>";
 			$ret .= "<div id=\"listDocActualPage\" class=\"actualPage\">";
 			$ret .= "Pagina ";
@@ -307,15 +307,16 @@ class Php_AndreaBoccaccio_View_ViewDocumentDenormList extends Php_AndreaBoccacci
 			$ret .= "</div>";
 			$ret .= "<div id=\"listDocNextPage\" class=\"nextPage\">";
 			$ret .= "<a href=\"" . $_SERVER["PHP_SELF"];
-			$ret .= "?op=docList&page=" . strval((intval($actualPage)+2)%intval($totalPages)) . $getWherePrefix . $myGetWhere;
-			$ret .= $getOrderPrefix . $myGetOrder . "\"\">Pagina " . strval((intval($actualPage)+2)%intval($totalPages)) . "</a>";
+			$ret .= "?op=docList&page=" . strval(min((intval($actualPage)+1),(intval($totalPages)-1))) . $getWherePrefix . $myGetWhere;
+			$ret .= $getOrderPrefix . $myGetOrder . "\"\">Pagina " . strval((min((intval($actualPage)+1),(intval($totalPages)-1)))+1) . "</a>";
 			$ret .= "</div>";
 			$ret .= "<div id=\"listDocLastPage\" class=\"lastPage\">";
 			$ret .= "<a href=\"" . $_SERVER["PHP_SELF"];
-			$ret .= "?op=docList&page=" . strval(intval($totalPages)) . $getWherePrefix . $myGetWhere;
+			$ret .= "?op=docList&page=" . strval((intval($totalPages)-1)) . $getWherePrefix . $myGetWhere;
 			$ret .= $getOrderPrefix . $myGetOrder . "\"\">Pagina " . strval(intval($totalPages)) . "</a>";
 			$ret .= "</div>";
 			$ret .= "</div>";
+			$ret .= "<br />";
 		}
 		$ret .= "<div id=\"listDocWhere\" class=\"where\">";
 		$ret .= "<form method=\"post\" action=\"";
