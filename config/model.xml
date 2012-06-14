@@ -19,35 +19,13 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with phpmywhs.  If not, see <http://www.gnu.org/licenses/>.
  -->
-<!DOCTYPE config>
-<config>
-<db>
-<server>localhost</server>
-<username>phpmywhstest</username>
-<password>phpmywhstest</password>
-<dbname>phpmywhstest</dbname>
-</db>
-<factories>
-<fileName>
-config/factories.xml
-</fileName>
-</factories>
-<classes>
-<db>mysql</db>
-<login>random</login>
-</classes>
-<login>
-<hash>sha512</hash>
-</login>
-<session>
-<persistence>120</persistence>
-</session>
-<memory>
-<rowsPerPage>10</rowsPerPage>
-</memory>
+<!DOCTYPE model>
 <model>
-<fileName>
-config/model.xml
-</fileName>
+	<class id="cause">
+		<dbtab name="CAUSE" />
+		<var name="id" kind="int" value="-1" dbName="id" />
+		<var name="in_out" kind="string" value="" dbName="in_out" />
+		<var name="name" kind="string" value="" dbName="name" />
+		<var name="description" kind="string" value="" dbName="description" />
+	</class>
 </model>
-</config>
