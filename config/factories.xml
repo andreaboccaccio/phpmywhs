@@ -36,12 +36,12 @@ along with phpmywhs.  If not, see <http://www.gnu.org/licenses/>.
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewVoid" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewMain" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewLogin" />
-		<class default="no" id="Php_AndreaBoccaccio_View_ViewDocumentDenormList" />
-		<class default="no" id="Php_AndreaBoccaccio_View_ViewDocumentDenormInsert" />
-		<class default="no" id="Php_AndreaBoccaccio_View_ViewDocumentDenorm" />
-		<class default="no" id="Php_AndreaBoccaccio_View_ViewItemDenormListSubDocument" />
-		<class default="no" id="Php_AndreaBoccaccio_View_ViewItemDenormInsert" />
-		<class default="no" id="Php_AndreaBoccaccio_View_ViewItemDenorm" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewDocumentList" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewDocumentInsert" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewDocument" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewItemListSubDocument" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewItemInsert" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewItem" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewCauseList" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewCauseInsert" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewCause" />
@@ -50,5 +50,7 @@ along with phpmywhs.  If not, see <http://www.gnu.org/licenses/>.
 		<class default="yes" id="Php_AndreaBoccaccio_Model_MappingModelNull" />
 		<class default="no" id="Php_AndreaBoccaccio_Model_MappingModelVoid" />
 		<class default="no" id="Php_AndreaBoccaccio_Model_MappingModelCause" />
+		<class default="no" id="Php_AndreaBoccaccio_Model_MappingModelDocument" />
+		<class default="no" id="Php_AndreaBoccaccio_Model_MappingModelItem" />
 	</factory>
 </factories>
