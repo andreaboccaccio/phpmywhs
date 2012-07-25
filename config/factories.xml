@@ -42,6 +42,9 @@ along with phpmywhs.  If not, see <http://www.gnu.org/licenses/>.
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewItemListSubDocument" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewItemInsert" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewItem" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewItemOutList" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewItemOut" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewItemOutInsert" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewCauseList" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewCauseInsert" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewCause" />
@@ -52,5 +55,6 @@ along with phpmywhs.  If not, see <http://www.gnu.org/licenses/>.
 		<class default="no" id="Php_AndreaBoccaccio_Model_MappingModelCause" />
 		<class default="no" id="Php_AndreaBoccaccio_Model_MappingModelDocument" />
 		<class default="no" id="Php_AndreaBoccaccio_Model_MappingModelItem" />
+		<class default="no" id="Php_AndreaBoccaccio_Model_MappingModelItemOut" />
 	</factory>
 </factories>

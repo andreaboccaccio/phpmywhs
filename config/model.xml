@@ -56,4 +56,16 @@ along with phpmywhs.  If not, see <http://www.gnu.org/licenses/>.
 		<var name="price" kind="float" value="-1.0" dbName="price" />
 		<var name="description" kind="string" value="" dbName="description" />
 	</class>
+	<class id="itemout">
+		<dbtab name="ITEM_OUT" />
+		<var name="id" kind="int" value="-1" dbName="id" />
+		<var name="cause" kind="int" value="-1" dbName="cause" />
+		<var name="kind" kind="string" value="" dbName="kind" />
+		<var name="code" kind="string" value="" dbName="code" />
+		<var name="name" kind="string" value="" dbName="name" />
+		<var name="qty" kind="int" value="-1" dbName="qty" />
+		<var name="cost" kind="float" value="-1.0" dbName="cost" />
+		<var name="price" kind="float" value="-1.0" dbName="price" />
+		<var name="description" kind="string" value="" dbName="description" />
+	</class>
 </model>

@@ -124,12 +124,16 @@ abstract class Php_AndreaBoccaccio_Model_ManagerAbstract implements Php_AndreaBo
 		$ret["totalRows"] = $totalRows;
 		$ret["totalPages"] = $totalPages;
 		if(intval($totalRows) > 0) {
-			$page = abs(intval($page))%$totalPages;
-			$offset = $page*intval($rowsPerPage);
-			$ret["actualPage"] = $page;
-			$ret["actualOffset"] = $offset;
-			$strSQLLimit .= $offset . "," . $rowsPerPage;
-			$strSQL .= $strSQLOptional . $strSQLOrderBy . $strSQLLimit . ";";
+			if($page !== null) {
+				$page = abs(intval($page))%$totalPages;
+				$offset = $page*intval($rowsPerPage);
+				$ret["actualPage"] = $page;
+				$ret["actualOffset"] = $offset;
+				$strSQLLimit .= $offset . "," . $rowsPerPage;
+				$strSQL .= $strSQLOptional . $strSQLOrderBy . $strSQLLimit . ";";
+			} else {
+				$strSQL .= $strSQLOptional . $strSQLOrderBy . ";";
+			}
 			$res = $db->execQuery($strSQL);
 			if($res["success"] == TRUE) {
 				if($res["numrows"] > 0) {
