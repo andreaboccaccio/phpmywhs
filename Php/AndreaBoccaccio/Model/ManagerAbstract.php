@@ -132,6 +132,8 @@ abstract class Php_AndreaBoccaccio_Model_ManagerAbstract implements Php_AndreaBo
 				$strSQLLimit .= $offset . "," . $rowsPerPage;
 				$strSQL .= $strSQLOptional . $strSQLOrderBy . $strSQLLimit . ";";
 			} else {
+				$ret["actualPage"] = 0;
+				$ret["actualOffset"] = 0;
 				$strSQL .= $strSQLOptional . $strSQLOrderBy . ";";
 			}
 			$res = $db->execQuery($strSQL);

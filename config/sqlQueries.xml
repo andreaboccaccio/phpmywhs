@@ -19,40 +19,21 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with phpmywhs.  If not, see <http://www.gnu.org/licenses/>.
  -->
-<!DOCTYPE config>
-<config>
-<db>
-<server>localhost</server>
-<username>phpmywhstest</username>
-<password>phpmywhstest</password>
-<dbname>phpmywhstest</dbname>
-</db>
-<factories>
-<fileName>
-config/factories.xml
-</fileName>
-</factories>
-<classes>
-<db>mysql</db>
-<login>random</login>
-</classes>
-<login>
-<hash>sha512</hash>
-</login>
-<session>
-<persistence>120</persistence>
-</session>
-<memory>
-<rowsPerPage>10</rowsPerPage>
-</memory>
-<model>
-<fileName>
-config/model.xml
-</fileName>
-</model>
+<!DOCTYPE sqlQueries>
 <sqlQueries>
-<fileName>
-config/sqlQueries.xml
-</fileName>
+	<sqlQuery id="itemsKindCodeName" displayName="Articoli Caricati per Categoria, Codice e Nome">
+		<strSQL>
+			SELECT kind AS Categoria
+				,code AS Codice
+				,name AS Nome
+				,SUM(qty) AS QTA_Caricata
+				FROM ITEM_DENORM
+				GROUP BY kind
+					,code
+					,name
+				ORDER BY kind
+					,code
+					,name
+		</strSQL>
+	</sqlQuery>
 </sqlQueries>
-</config>

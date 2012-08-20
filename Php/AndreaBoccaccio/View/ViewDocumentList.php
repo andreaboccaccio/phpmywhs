@@ -103,77 +103,77 @@ class Php_AndreaBoccaccio_View_ViewDocumentList extends Php_AndreaBoccaccio_View
 		
 		if(isset($myGP["wYear"])) {
 			if(trim(strlen($myGP["wYear"]))>0) {
-				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $_POST["wYear"])) {
+				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $myGP["wYear"])) {
 					$filter["year"] = trim($myGP["wYear"]);
 				}
 			}
 		}
 		if(isset($myGP["wKind"])) {
 			if(strlen(trim($myGP["wKind"]))>0) {
-				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $_POST["wKind"])) {
+				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $myGP["wKind"])) {
 					$filter["kind"] = trim($myGP["wKind"]);
 				}
 			}
 		}
 		if(isset($myGP["wCode"])) {
 			if(strlen(trim($myGP["wCode"]))>0) {
-				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $_POST["wCode"])) {
+				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $myGP["wCode"])) {
 					$filter["code"] = trim($myGP["wCode"]);
 				}
 			}
 		}
 		if(isset($myGP["wContractor_kind"])) {
 			if(strlen(trim($myGP["wContractor_kind"]))>0) {
-				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $_POST["wContractor_kind"])) {
+				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $myGP["wContractor_kind"])) {
 					$filter["contractor_kind"] = trim($myGP["wContractor_kind"]);
 				}
 			}
 		}
 		if(isset($myGP["wContractor_code"])) {
 			if(strlen(trim($myGP["wContractor_code"]))>0) {
-				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $_POST["wContractor_code"])) {
+				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $myGP["wContractor_code"])) {
 					$filter["contractor_code"] = trim($myGP["wContractor_code"]);
 				}
 			}
 		}
 		if(isset($myGP["wContractor"])) {
 			if(strlen(trim($myGP["wContractor"]))>0) {
-				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $_POST["wContractor"])) {
+				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $myGP["wContractor"])) {
 					$filter["contractor"] = trim($myGP["wContractor"]);
 				}
 			}
 		}
 		if(isset($myGP["wWarehouse"])) {
 			if(strlen(trim($myGP["wWarehouse"]))>0) {
-				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $_POST["wWarehouse"])) {
+				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $myGP["wWarehouse"])) {
 					$filter["warehouse"] = trim($myGP["wWarehouse"]);
 				}
 			}
 		}
 		if(isset($myGP["wDescription"])) {
 			if(strlen(trim($myGP["wDescription"]))>0) {
-				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $_POST["wDescription"])) {
+				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $myGP["wDescription"])) {
 					$filter["description"] = trim($myGP["wDescription"]);
 				}
 			}
 		}
 		if(isset($myGP["wItemKind"])) {
 			if(strlen(trim($myGP["wItemKind"]))>0) {
-				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $_POST["wItemKind"])) {
+				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $myGP["wItemKind"])) {
 					$filter["itemKind"] = trim($myGP["wItemKind"]);
 				}
 			}
 		}
 		if(isset($myGP["wItemCode"])) {
 			if(strlen(trim($myGP["wItemCode"]))>0) {
-				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $_POST["wItemCode"])) {
+				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $myGP["wItemCode"])) {
 					$filter["itemCode"] = trim($myGP["wItemCode"]);
 				}
 			}
 		}
 		if(isset($myGP["wItemName"])) {
 			if(strlen(trim($myGP["wItemName"]))>0) {
-				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $_POST["wItemName"])) {
+				if(preg_match("/^(?!.*(alter|create|drop|rename|truncate|call|delete|do|handler|insert|load|replace|select|update)).*$/i", $myGP["wItemName"])) {
 					$filter["itemName"] = trim($myGP["wItemName"]);
 				}
 			}
