@@ -225,9 +225,17 @@ class Php_AndreaBoccaccio_View_ViewItemOutInsert extends Php_AndreaBoccaccio_Vie
 		$ret .= "<div class=\"label\">Categoria:</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"kind\"";
+		if(isset($_GET["kind"])) {
+			if(!is_null($_GET["kind"])) {
+				if(strlen($_GET["kind"])>0) {
+					$ret .= " value=\"" . $_GET["kind"] . "\"";
+				}
+			}
+		}
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["kind"] . "\"";
 		}
+		
 		$ret .= " />";
 		$ret .= "</div><br />";
 		if(($koBitArray & 0x4) == 0x4) {
@@ -237,6 +245,13 @@ class Php_AndreaBoccaccio_View_ViewItemOutInsert extends Php_AndreaBoccaccio_Vie
 		$ret .= "<div class=\"label\">Codice:</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"code\"";
+		if(isset($_GET["code"])) {
+			if(!is_null($_GET["code"])) {
+				if(strlen($_GET["code"])>0) {
+					$ret .= " value=\"" . $_GET["code"] . "\"";
+				}
+			}
+		}
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["code"] . "\"";
 		}
@@ -249,6 +264,13 @@ class Php_AndreaBoccaccio_View_ViewItemOutInsert extends Php_AndreaBoccaccio_Vie
 		$ret .= "<div class=\"label\">Nome:</div>";
 		$ret .= "<div class=\"input\">";
 		$ret .= "<input type=\"text\" name=\"name\"";
+		if(isset($_GET["name"])) {
+			if(!is_null($_GET["name"])) {
+				if(strlen($_GET["name"])>0) {
+					$ret .= " value=\"" . $_GET["name"] . "\"";
+				}
+			}
+		}
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["name"] . "\"";
 		}

@@ -134,10 +134,16 @@ abstract class Php_AndreaBoccaccio_Model_SqlQueriesManagerAbstract implements Ph
 		$ret["rowsPerPage"] = intval($rowsPerPage);
 		$ret["totalRows"] = $totalRows;
 		$ret["totalPages"] = $totalPages;
-		if(intval($totalRows) > 0) {
+		if(intval($totalRows) >= 0) {
 			if($requestedPage !== null) {
-				$requestedPage = abs(intval($requestedPage))%$totalPages;
-				$offset = $requestedPage*intval($rowsPerPage);
+				if(intval($totalRows) > 0) {
+					$requestedPage = abs(intval($requestedPage))%$totalPages;
+					$offset = $requestedPage*intval($rowsPerPage);
+				}
+				else {
+					$requestedPage = 0;
+					$offset = 0;
+				}
 				$ret["actualPage"] = $requestedPage;
 				$ret["actualOffset"] = $offset;
 				$strSQLLimit .= $offset . "," . $rowsPerPage;
@@ -155,6 +161,8 @@ abstract class Php_AndreaBoccaccio_Model_SqlQueriesManagerAbstract implements Ph
 			$ret["actualPage"] = 0;
 			$ret["actualOffset"] = 0;
 			$ret["result"] = array();
+			$ret["result"]["success"] = FALSE;
+			$ret["result"]["result"] = array();
 		}
 		
 		return $ret;

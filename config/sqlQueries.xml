@@ -36,4 +36,98 @@ along with phpmywhs.  If not, see <http://www.gnu.org/licenses/>.
 					,name
 		</strSQL>
 	</sqlQuery>
+	<sqlQuery id="stocks" displayName="Giacenze per Categoria, Codice e Nome">
+		<strSQL>
+			SELECT ITEM_IN.Categoria AS Categoria
+				,ITEM_IN.Codice AS Codice
+				,ITEM_IN.Nome AS Nome
+				,QTA_Caricata
+				,IFNULL(QTA_Scaricata,0) AS QTA_Scaricata
+				,(QTA_Caricata - IFNULL(QTA_Scaricata,0)) AS Giacenza
+			FROM
+			(
+				SELECT kind AS Categoria
+					,code AS Codice
+					,name AS Nome
+					,SUM(qty) AS QTA_Caricata
+				FROM ITEM_DENORM
+				GROUP BY kind
+					,code
+					,name
+			) AS ITEM_IN
+			LEFT JOIN
+			(
+				SELECT kind AS Categoria
+					,code AS Codice
+					,name AS Nome
+					,SUM(qty) AS QTA_Scaricata
+				FROM ITEM_OUT
+				GROUP BY kind
+					,code
+					,name
+			) AS ITEM_OUT
+			ON
+			(
+				(ITEM_IN.Categoria = ITEM_OUT.Categoria)
+				AND (ITEM_IN.Codice = ITEM_OUT.Codice)
+				AND (ITEM_IN.Nome = ITEM_OUT.Nome)
+			)
+			ORDER BY ITEM_IN.Categoria
+				,ITEM_IN.Codice
+				,ITEM_IN.Nome
+		</strSQL>
+	</sqlQuery>
+	<sqlQuery id="suppliers" displayName="Fornitori">
+		<strSQL>
+			SELECT contractor_code AS PIVA
+				,contractor AS fornitore
+				FROM DOCUMENT_DENORM
+				GROUP BY contractor_code
+					,contractor
+		</strSQL>
+	</sqlQuery>
+	<wizard id="newItemOut" displayName="Articoli con giacenze attive">
+		<strSQL>
+			SELECT ITEM_IN.Categoria AS Categoria
+				,ITEM_IN.Codice AS Codice
+				,ITEM_IN.Nome AS Nome
+				,QTA_Caricata
+				,IFNULL(QTA_Scaricata,0) AS QTA_Scaricata
+				,(QTA_Caricata - IFNULL(QTA_Scaricata,0)) AS Giacenza
+			FROM
+			(
+				SELECT kind AS Categoria
+					,code AS Codice
+					,name AS Nome
+					,SUM(qty) AS QTA_Caricata
+				FROM ITEM_DENORM
+				GROUP BY kind
+					,code
+					,name
+			) AS ITEM_IN
+			LEFT JOIN
+			(
+				SELECT kind AS Categoria
+					,code AS Codice
+					,name AS Nome
+					,SUM(qty) AS QTA_Scaricata
+				FROM ITEM_OUT
+				GROUP BY kind
+					,code
+					,name
+			) AS ITEM_OUT
+			ON
+			(
+				(ITEM_IN.Categoria = ITEM_OUT.Categoria)
+				AND (ITEM_IN.Codice = ITEM_OUT.Codice)
+				AND (ITEM_IN.Nome = ITEM_OUT.Nome)
+			)
+			WHERE ((QTA_Caricata - IFNULL(QTA_Scaricata,0)) > 0)
+		</strSQL>
+		<fieldsMapping>
+			<fieldMapping sql="Categoria" viewInsert="kind"/>
+			<fieldMapping sql="Codice" viewInsert="code"/>
+			<fieldMapping sql="Nome" viewInsert="name"/>
+		</fieldsMapping>
+	</wizard>
 </sqlQueries>

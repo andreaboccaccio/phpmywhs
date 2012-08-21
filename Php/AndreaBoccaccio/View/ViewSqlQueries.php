@@ -215,7 +215,7 @@ class Php_AndreaBoccaccio_View_ViewSqlQueries extends Php_AndreaBoccaccio_View_V
 					$ret .= "</div>";
 					$ret .= "<div id=\"listDocPrevPage\" class=\"prevPage\">";
 					$ret .= "<a href=\"" . $_SERVER["PHP_SELF"];
-					$ret .= "?op=sqlQueries&&queryId=" . trim($myGP["queryId"]) . "&page=" . strval(max((intval($actualPage)-1),0)) . $getWherePrefix . $myGetWhere;
+					$ret .= "?op=sqlQueries&queryId=" . trim($myGP["queryId"]) . "&page=" . strval(max((intval($actualPage)-1),0)) . $getWherePrefix . $myGetWhere;
 					$ret .= $getOrderPrefix . $myGetOrder . "\"\">Pagina " . strval((max((intval($actualPage)-1),0))+1) . "</a>";
 					$ret .= "</div>";
 					$ret .= "<div id=\"listDocActualPage\" class=\"actualPage\">";

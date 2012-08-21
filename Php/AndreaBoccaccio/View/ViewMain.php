@@ -48,6 +48,9 @@ class Php_AndreaBoccaccio_View_ViewMain extends Php_AndreaBoccaccio_View_ViewCon
 		$ret .= "<div id=\"mainItemOutList\" class=\"menuentry\">\n";
 		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=itemOutList\">Scarichi</a>";
 		$ret .= "</div>\n";
+		$ret .= "<div id=\"mainItemOutList\" class=\"menuentry\">\n";
+		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=itemOutWizard\">Scarichi Guidati</a>";
+		$ret .= "</div>\n";
 		$ret .= "<div id=\"mainCauseList\" class=\"menuentry\">\n";
 		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=causeList\">Causali</a>";
 		$ret .= "</div>\n";
