@@ -152,7 +152,7 @@ class Php_AndreaBoccaccio_View_ViewItemOut extends Php_AndreaBoccaccio_View_View
 						$koBitArray = $koBitArray | 0x10;
 					}
 					if(isset($_POST["cost"])) {
-						if(preg_match("/^\d+,\d{2}$/", $_POST["cost"])) {
+						if(preg_match("/^(\d+,\d{2}|.{0})$/", $_POST["cost"])) {
 							$koBitArray = $koBitArray & 0x7fffffdf;
 							$initArray["cost"] = $db->sanitize(str_replace(",", ".", $_POST["cost"]));
 						}
@@ -164,7 +164,7 @@ class Php_AndreaBoccaccio_View_ViewItemOut extends Php_AndreaBoccaccio_View_View
 						$koBitArray = $koBitArray | 0x20;
 					}
 					if(isset($_POST["price"])) {
-						if(preg_match("/^\d+,\d{2}$/", $_POST["price"])) {
+						if(preg_match("/^(\d+,\d{2}|.{0})$/", $_POST["price"])) {
 							$koBitArray = $koBitArray & 0x7fffffbf;
 							$initArray["price"] = $db->sanitize(str_replace(",", ".", $_POST["price"]));
 						}
@@ -210,6 +210,19 @@ class Php_AndreaBoccaccio_View_ViewItemOut extends Php_AndreaBoccaccio_View_View
 		}
 		else {
 			$ret .= "?op=itemOut&toDo=modify&id=". $itemDenorm->getVar('id') . "\"> ";
+			$ret .= "<div>";
+			$ret .= "<a href=\"" . $_SERVER["PHP_SELF"];
+			$ret .= "?op=itemOutNew&cause=" . $itemDenorm->getVar('cause');
+			$ret .= "&kind=" . $itemDenorm->getVar('kind');
+			$ret .= "&code=" . $itemDenorm->getVar('code');
+			$ret .= "&name=" . $itemDenorm->getVar('name');
+			$ret .= "&qty=" . $itemDenorm->getVar('qty');
+			$ret .= "&cost=" . number_format($itemDenorm->getVar('cost'),2,',','');
+			$ret .= "&price=" . number_format($itemDenorm->getVar('price'),2,',','');
+			$ret .= "&description=" . $itemDenorm->getVar('description');
+			$ret .= "\">Copia come nuovo";
+			$ret .= "</a>";
+			$ret .= "</div>";
 		}
 		$ret .= "<input type=\"hidden\" name=\"itemDenormId\" value=\"" . $itemDenorm->getVar('id') . "\" />";
 		if(($koBitArray & 0x1) == 0x1) {

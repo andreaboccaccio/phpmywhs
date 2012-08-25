@@ -129,10 +129,6 @@ class Php_AndreaBoccaccio_View_ViewDocumentInsert extends Php_AndreaBoccaccio_Vi
 					else {
 						$koBitArray = $koBitArray | 0x10;
 					}
-					if($koBitArray == 0x0) {
-						$docDenorm->init($initArray);
-						$docDenorm->saveToDb();
-					}
 					if(isset($_POST["contractor"])) {
 						if(preg_match("/^[a-zA-Z0-9 \-_]{1,25}$/", $_POST["contractor"])) {
 							$koBitArray = $koBitArray & 0x7fffffdf;
@@ -170,7 +166,7 @@ class Php_AndreaBoccaccio_View_ViewDocumentInsert extends Php_AndreaBoccaccio_Vi
 						$koBitArray = $koBitArray | 0x80;
 					}
 					if(isset($_POST["vt_start"])) {
-						if(preg_match("/^[a-zA-Z0-9 \-_:]{8,20}$/", $_POST["vt_start"])) {
+						if(preg_match("/^([a-zA-Z0-9 \-_:]{8,20}|.{0})$/", $_POST["vt_start"])) {
 							$koBitArray = $koBitArray & 0x7ffffeff;
 							$initArray["vt_start"] = $db->sanitize($_POST["vt_start"]);
 						}
@@ -182,7 +178,7 @@ class Php_AndreaBoccaccio_View_ViewDocumentInsert extends Php_AndreaBoccaccio_Vi
 						$koBitArray = $koBitArray | 0x100;
 					}
 					if(isset($_POST["vt_end"])) {
-						if(preg_match("/^[a-zA-Z0-9 \-_:]{8,20}$/", $_POST["vt_end"])) {
+						if(preg_match("/^([a-zA-Z0-9 \-_:]{8,20}|.{0})$/", $_POST["vt_end"])) {
 							$koBitArray = $koBitArray & 0x7ffffdff;
 							$initArray["vt_end"] = $db->sanitize($_POST["vt_end"]);
 						}
@@ -231,6 +227,12 @@ class Php_AndreaBoccaccio_View_ViewDocumentInsert extends Php_AndreaBoccaccio_Vi
 		$ret .= "<input type=\"text\" name=\"year\"";
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["year"] . "\"";
+		} else if(isset($_GET["year"])) {
+			if(!is_null($_GET["year"])) {
+				if(strlen($_GET["year"])>0) {
+					$ret .= " value=\"" . $_GET["year"] . "\"";
+				}
+			}
 		}
 		$ret .= " />";
 		$ret .= "</div>";
@@ -244,6 +246,12 @@ class Php_AndreaBoccaccio_View_ViewDocumentInsert extends Php_AndreaBoccaccio_Vi
 		$ret .= "<input type=\"text\" name=\"kind\"";
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["kind"] . "\"";
+		} else if(isset($_GET["kind"])) {
+			if(!is_null($_GET["kind"])) {
+				if(strlen($_GET["kind"])>0) {
+					$ret .= " value=\"" . $_GET["kind"] . "\"";
+				}
+			}
 		}
 		$ret .= " />";
 		$ret .= "</div>";
@@ -257,6 +265,12 @@ class Php_AndreaBoccaccio_View_ViewDocumentInsert extends Php_AndreaBoccaccio_Vi
 		$ret .= "<input type=\"text\" name=\"code\"";
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["code"] . "\"";
+		} else if(isset($_GET["code"])) {
+			if(!is_null($_GET["code"])) {
+				if(strlen($_GET["code"])>0) {
+					$ret .= " value=\"" . $_GET["code"] . "\"";
+				}
+			}
 		}
 		$ret .= " />";
 		$ret .= "</div>";
@@ -283,6 +297,12 @@ class Php_AndreaBoccaccio_View_ViewDocumentInsert extends Php_AndreaBoccaccio_Vi
 		$ret .= "<input type=\"text\" name=\"contractor_kind\"";
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["contractor_kind"] . "\"";
+		} else if(isset($_GET["contractor_kind"])) {
+			if(!is_null($_GET["contractor_kind"])) {
+				if(strlen($_GET["contractor_kind"])>0) {
+					$ret .= " value=\"" . $_GET["contractor_kind"] . "\"";
+				}
+			}
 		}
 		$ret .= " />";
 		$ret .= "</div>";
@@ -296,6 +316,12 @@ class Php_AndreaBoccaccio_View_ViewDocumentInsert extends Php_AndreaBoccaccio_Vi
 		$ret .= "<input type=\"text\" name=\"contractor_code\"";
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["contractor_code"] . "\"";
+		} else if(isset($_GET["contractor_code"])) {
+			if(!is_null($_GET["contractor_code"])) {
+				if(strlen($_GET["contractor_code"])>0) {
+					$ret .= " value=\"" . $_GET["contractor_code"] . "\"";
+				}
+			}
 		}
 		$ret .= " />";
 		$ret .= "</div>";
@@ -309,6 +335,12 @@ class Php_AndreaBoccaccio_View_ViewDocumentInsert extends Php_AndreaBoccaccio_Vi
 		$ret .= "<input type=\"text\" name=\"contractor\"";
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["contractor"] . "\"";
+		} else if(isset($_GET["contractor"])) {
+			if(!is_null($_GET["contractor"])) {
+				if(strlen($_GET["contractor"])>0) {
+					$ret .= " value=\"" . $_GET["contractor"] . "\"";
+				}
+			}
 		}
 		$ret .= " />";
 		$ret .= "</div>";
@@ -322,6 +354,12 @@ class Php_AndreaBoccaccio_View_ViewDocumentInsert extends Php_AndreaBoccaccio_Vi
 		$ret .= "<input type=\"text\" name=\"warehouse\"";
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["warehouse"] . "\"";
+		} else if(isset($_GET["warehouse"])) {
+			if(!is_null($_GET["warehouse"])) {
+				if(strlen($_GET["warehouse"])>0) {
+					$ret .= " value=\"" . $_GET["warehouse"] . "\"";
+				}
+			}
 		}
 		$ret .= " />";
 		$ret .= "</div>";
@@ -361,6 +399,12 @@ class Php_AndreaBoccaccio_View_ViewDocumentInsert extends Php_AndreaBoccaccio_Vi
 		$ret .= "<input type=\"text\" name=\"description\"";
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["description"] . "\"";
+		} else if(isset($_GET["description"])) {
+			if(!is_null($_GET["description"])) {
+				if(strlen($_GET["description"])>0) {
+					$ret .= " value=\"" . $_GET["description"] . "\"";
+				}
+			}
 		}
 		$ret .= " />";
 		$ret .= "</div>";

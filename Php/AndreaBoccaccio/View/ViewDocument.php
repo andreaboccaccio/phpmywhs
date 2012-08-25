@@ -58,6 +58,11 @@ class Php_AndreaBoccaccio_View_ViewDocument extends Php_AndreaBoccaccio_View_Vie
 		$ret .= $_GET["id"];
 		$ret .= "\">Nuovo Articolo</a>";
 		$ret .= "</div>\n";
+		$ret .= "<div id=\"docItemNew\" class=\"menuentry\">\n";
+		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=itemInWizard&docId=";
+		$ret .= $_GET["id"];
+		$ret .= "\">Nuovo Articolo Guidato</a>";
+		$ret .= "</div>\n";
 		$ret .= "</div>\n";
 
 		return $ret;
@@ -256,6 +261,19 @@ class Php_AndreaBoccaccio_View_ViewDocument extends Php_AndreaBoccaccio_View_Vie
 		}
 		else {
 			$ret .= "?op=doc&toDo=modify&id=" . $docDenorm->getVar("id") . "\"> ";
+			$ret .= "<div>";
+			$ret .= "<a href=\"" . $_SERVER["PHP_SELF"];
+			$ret .= "?op=docNew&year=" . $docDenorm->getVar("year");
+			$ret .= "&kind=" . $docDenorm->getVar('kind');
+			$ret .= "&code=" . $docDenorm->getVar('code');
+			$ret .= "&contractor_kind=" . $docDenorm->getVar('contractor_kind');
+			$ret .= "&contractor_code=" . $docDenorm->getVar('contractor_code');
+			$ret .= "&contractor=" . $docDenorm->getVar('contractor');
+			$ret .= "&warehouse=" . $docDenorm->getVar('warehouse');
+			$ret .= "&description=" . $docDenorm->getVar('description');
+			$ret .= "\">Copia come nuovo";
+			$ret .= "</a>";
+			$ret .= "</div>";
 		}
 		$ret .= "<input type=\"hidden\" name=\"docDenormId\" value=\"" . $docDenorm->getVar("id") . "\" />";
 		if(($koBitArray & 0x1) == 0x1) {

@@ -130,4 +130,35 @@ along with phpmywhs.  If not, see <http://www.gnu.org/licenses/>.
 			<fieldMapping sql="Nome" viewInsert="name"/>
 		</fieldsMapping>
 	</wizard>
+	<wizard id="newItemIn" displayName="Articoli immessi nel sistema">
+		<strSQL>
+			SELECT kind AS Categoria
+				,code AS Codice
+				,name AS Nome
+			FROM
+			(
+				SELECT kind
+					,code
+					,name	
+				FROM ITEM_DENORM
+				UNION
+				SELECT
+					kind
+					,code
+					,name
+				FROM ITEM_OUT
+			)AS UNITED_TABLES
+			GROUP BY kind
+				,code
+				,name
+			ORDER BY kind 
+				,code
+				,name
+		</strSQL>
+		<fieldsMapping>
+			<fieldMapping sql="Categoria" viewInsert="kind"/>
+			<fieldMapping sql="Codice" viewInsert="code"/>
+			<fieldMapping sql="Nome" viewInsert="name"/>
+		</fieldsMapping>
+	</wizard>
 </sqlQueries>

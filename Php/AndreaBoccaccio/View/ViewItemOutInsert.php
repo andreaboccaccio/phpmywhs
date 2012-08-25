@@ -152,7 +152,7 @@ class Php_AndreaBoccaccio_View_ViewItemOutInsert extends Php_AndreaBoccaccio_Vie
 						$koBitArray = $koBitArray | 0x10;
 					}
 					if(isset($_POST["cost"])) {
-						if(preg_match("/^\d+,\d{2}$/", $_POST["cost"])) {
+						if(preg_match("/^(\d+,\d{2}|.{0})$/", $_POST["cost"])) {
 							$koBitArray = $koBitArray & 0x7fffffdf;
 							$initArray["cost"] = $db->sanitize(str_replace(",", ".", $_POST["cost"]));
 						}
@@ -164,7 +164,7 @@ class Php_AndreaBoccaccio_View_ViewItemOutInsert extends Php_AndreaBoccaccio_Vie
 						$koBitArray = $koBitArray | 0x20;
 					}
 					if(isset($_POST["price"])) {
-						if(preg_match("/^\d+,\d{2}$/", $_POST["price"])) {
+						if(preg_match("/^(\d+,\d{2}|.{0})$/", $_POST["price"])) {
 							$koBitArray = $koBitArray & 0x7fffffbf;
 							$initArray["price"] = $db->sanitize(str_replace(",", ".", $_POST["price"]));
 						}
@@ -213,7 +213,17 @@ class Php_AndreaBoccaccio_View_ViewItemOutInsert extends Php_AndreaBoccaccio_Vie
 		$tmpArr = $causeMan->getModels(null,$filterCauses,'name');
 		$causes = $tmpArr["result"];
 		foreach ($causes as $gotCause) {
-			$ret .= "<option value=\"". $gotCause->getVar('id');
+			$ret .= "<option";
+			if(isset($_GET["cause"])) {
+				if(!is_null($_GET["cause"])) {
+					if(strlen($_GET["cause"])>0) {
+						if(intval($_GET["cause"]) == $gotCause->getVar('id')) {
+							$ret .= " selected=\"selected\"";
+						}
+					}
+				}
+			}
+			$ret .= " value=\"". $gotCause->getVar('id');
 			$ret .= "\">". $gotCause->getVar('name') ."</option>";
 		}
 		$ret .= "</select>";
@@ -285,6 +295,12 @@ class Php_AndreaBoccaccio_View_ViewItemOutInsert extends Php_AndreaBoccaccio_Vie
 		$ret .= "<input type=\"text\" name=\"qty\"";
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["qty"] . "\"";
+		} else if(isset($_GET["qty"])) {
+			if(!is_null($_GET["qty"])) {
+				if(strlen($_GET["qty"])>0) {
+					$ret .= " value=\"" . $_GET["qty"] . "\"";
+				}
+			}
 		}
 		$ret .= " />";
 		$ret .= "</div><br />";
@@ -297,6 +313,12 @@ class Php_AndreaBoccaccio_View_ViewItemOutInsert extends Php_AndreaBoccaccio_Vie
 		$ret .= "<input type=\"text\" name=\"cost\"";
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["cost"] . "\"";
+		} else if(isset($_GET["cost"])) {
+			if(!is_null($_GET["cost"])) {
+				if(strlen($_GET["cost"])>0) {
+					$ret .= " value=\"" . $_GET["cost"] . "\"";
+				}
+			}
 		}
 		$ret .= " />";
 		$ret .= "</div><br />";
@@ -309,6 +331,12 @@ class Php_AndreaBoccaccio_View_ViewItemOutInsert extends Php_AndreaBoccaccio_Vie
 		$ret .= "<input type=\"text\" name=\"price\"";
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["price"] . "\"";
+		} else if(isset($_GET["price"])) {
+			if(!is_null($_GET["price"])) {
+				if(strlen($_GET["price"])>0) {
+					$ret .= " value=\"" . $_GET["price"] . "\"";
+				}
+			}
 		}
 		$ret .= " />";
 		$ret .= "</div><br />";
@@ -321,6 +349,12 @@ class Php_AndreaBoccaccio_View_ViewItemOutInsert extends Php_AndreaBoccaccio_Vie
 		$ret .= "<input type=\"text\" name=\"description\"";
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["description"] . "\"";
+		} else if(isset($_GET["description"])) {
+			if(!is_null($_GET["description"])) {
+				if(strlen($_GET["description"])>0) {
+					$ret .= " value=\"" . $_GET["description"] . "\"";
+				}
+			}
 		}
 		$ret .= " />";
 		$ret .= "</div><br />";

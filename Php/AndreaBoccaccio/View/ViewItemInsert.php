@@ -154,7 +154,7 @@ class Php_AndreaBoccaccio_View_ViewItemInsert extends Php_AndreaBoccaccio_View_V
 						$koBitArray = $koBitArray | 0x10;
 					}
 					if(isset($_POST["cost"])) {
-						if(preg_match("/^\d+,\d{2}$/", $_POST["cost"])) {
+						if(preg_match("/^(\d+,\d{2}|.{0})$/", $_POST["cost"])) {
 							$koBitArray = $koBitArray & 0x7fffffdf;
 							$initArray["cost"] = $db->sanitize(str_replace(",", ".", $_POST["cost"]));
 						}
@@ -166,7 +166,7 @@ class Php_AndreaBoccaccio_View_ViewItemInsert extends Php_AndreaBoccaccio_View_V
 						$koBitArray = $koBitArray | 0x20;
 					}
 					if(isset($_POST["price"])) {
-						if(preg_match("/^\d+,\d{2}$/", $_POST["price"])) {
+						if(preg_match("/^(\d+,\d{2}|.{0})$/", $_POST["price"])) {
 							$koBitArray = $koBitArray & 0x7fffffbf;
 							$initArray["price"] = $db->sanitize(str_replace(",", ".", $_POST["price"]));
 						}
@@ -211,6 +211,12 @@ class Php_AndreaBoccaccio_View_ViewItemInsert extends Php_AndreaBoccaccio_View_V
 		$ret .= "<input type=\"text\" name=\"kind\"";
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["kind"] . "\"";
+		} else if(isset($_GET["kind"])) {
+			if(!is_null($_GET["kind"])) {
+				if(strlen($_GET["kind"])>0) {
+					$ret .= " value=\"" . $_GET["kind"] . "\"";
+				}
+			}
 		}
 		$ret .= " />";
 		$ret .= "</div><br />";
@@ -223,6 +229,12 @@ class Php_AndreaBoccaccio_View_ViewItemInsert extends Php_AndreaBoccaccio_View_V
 		$ret .= "<input type=\"text\" name=\"code\"";
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["code"] . "\"";
+		} else if(isset($_GET["code"])) {
+			if(!is_null($_GET["code"])) {
+				if(strlen($_GET["code"])>0) {
+					$ret .= " value=\"" . $_GET["code"] . "\"";
+				}
+			}
 		}
 		$ret .= " />";
 		$ret .= "</div><br />";
@@ -235,6 +247,12 @@ class Php_AndreaBoccaccio_View_ViewItemInsert extends Php_AndreaBoccaccio_View_V
 		$ret .= "<input type=\"text\" name=\"name\"";
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["name"] . "\"";
+		} else if(isset($_GET["name"])) {
+			if(!is_null($_GET["name"])) {
+				if(strlen($_GET["name"])>0) {
+					$ret .= " value=\"" . $_GET["name"] . "\"";
+				}
+			}
 		}
 		$ret .= " />";
 		$ret .= "</div><br />";
@@ -247,6 +265,12 @@ class Php_AndreaBoccaccio_View_ViewItemInsert extends Php_AndreaBoccaccio_View_V
 		$ret .= "<input type=\"text\" name=\"qty\"";
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["qty"] . "\"";
+		} else if(isset($_GET["qty"])) {
+			if(!is_null($_GET["qty"])) {
+				if(strlen($_GET["qty"])>0) {
+					$ret .= " value=\"" . $_GET["qty"] . "\"";
+				}
+			}
 		}
 		$ret .= " />";
 		$ret .= "</div><br />";
@@ -259,6 +283,12 @@ class Php_AndreaBoccaccio_View_ViewItemInsert extends Php_AndreaBoccaccio_View_V
 		$ret .= "<input type=\"text\" name=\"cost\"";
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["cost"] . "\"";
+		} else if(isset($_GET["cost"])) {
+			if(!is_null($_GET["cost"])) {
+				if(strlen($_GET["cost"])>0) {
+					$ret .= " value=\"" . $_GET["cost"] . "\"";
+				}
+			}
 		}
 		$ret .= " />";
 		$ret .= "</div><br />";
@@ -271,6 +301,12 @@ class Php_AndreaBoccaccio_View_ViewItemInsert extends Php_AndreaBoccaccio_View_V
 		$ret .= "<input type=\"text\" name=\"price\"";
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["price"] . "\"";
+		} else if(isset($_GET["price"])) {
+			if(!is_null($_GET["price"])) {
+				if(strlen($_GET["price"])>0) {
+					$ret .= " value=\"" . $_GET["price"] . "\"";
+				}
+			}
 		}
 		$ret .= " />";
 		$ret .= "</div><br />";
@@ -283,6 +319,12 @@ class Php_AndreaBoccaccio_View_ViewItemInsert extends Php_AndreaBoccaccio_View_V
 		$ret .= "<input type=\"text\" name=\"description\"";
 		if($koBitArray != 0x0) {
 			$ret .= " value=\"" . $_POST["description"] . "\"";
+		} else if(isset($_GET["description"])) {
+			if(!is_null($_GET["description"])) {
+				if(strlen($_GET["description"])>0) {
+					$ret .= " value=\"" . $_GET["description"] . "\"";
+				}
+			}
 		}
 		$ret .= " />";
 		$ret .= "</div><br />";
