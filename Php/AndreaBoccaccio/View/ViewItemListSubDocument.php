@@ -55,6 +55,11 @@ class Php_AndreaBoccaccio_View_ViewItemListSubDocument extends Php_AndreaBoccacc
 		$ret .= $_GET["docId"];
 		$ret .= "\">Nuovo Articolo</a>";
 		$ret .= "</div>\n";
+		$ret .= "<div id=\"docItemNew\" class=\"menuentry\">\n";
+		$ret .= "<a href=\"" . $_SERVER["PHP_SELF"] . "?op=itemInWizard&docId=";
+		$ret .= $_GET["id"];
+		$ret .= "\">Nuovo Articolo Guidato</a>";
+		$ret .= "</div>\n";
 		$ret .= "</div>\n";
 
 		return $ret;
