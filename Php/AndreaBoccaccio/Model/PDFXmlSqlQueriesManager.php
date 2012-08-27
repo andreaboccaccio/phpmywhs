@@ -24,9 +24,29 @@ class Php_AndreaBoccaccio_Model_PDFXmlSqlQueriesManager extends Php_AndreaBoccac
 {
 	private $pdfTables = array();
 	
-	protected function addPDFTable($sqlId) {
+	protected function addPDFTable($sqlId
+			,$pageOrientation='P'
+			,$unit='mm'
+			,$pageSize='A4') {
+		$tmpPageSize;
+		
 		if(!array_key_exists($sqlId, $this->pdfTables)) {
-			$this->pdfTables[$sqlId] = new Php_AndreaBoccaccio_PDF_SimplePDFTable();
+			switch ($pageSize) {
+				case 'A3' :
+				case 'A4' :
+				case 'A5' :
+				case 'Letter' :
+				case 'Legal' :
+					$tmpPageSize = $pageSize;
+					break;
+				default:
+					$tmpPageSize = preg_split("/x/", $pageSize);
+			}
+			$this->pdfTables[$sqlId] = new Php_AndreaBoccaccio_PDF_SimplePDFTable(
+					$pageOrientation
+					,$unit
+					,$tmpPageSize
+					);
 		}
 	}
 	
@@ -83,8 +103,12 @@ class Php_AndreaBoccaccio_Model_PDFXmlSqlQueriesManager extends Php_AndreaBoccac
 					,preg_replace("/[\s]+/", " ", $strTmpNode->nodeValue));
 			$tmpPrintNodes = $tmpNode->getElementsByTagName('printInfo');
 			if($tmpPrintNodes->length == 1) {
-				$this->addPDFTable($tmpNode->getAttribute('id'));
 				$tmpPrintNode = $tmpPrintNodes->item(0);
+				$this->addPDFTable($tmpNode->getAttribute('id')
+						,$tmpPrintNode->getAttribute('pageOrientation')
+						,$tmpPrintNode->getAttribute('unit')
+						,$tmpPrintNode->getAttribute('pageSize')
+						);
 				$tmpRowNodes = $tmpPrintNode->getElementsByTagName('rowInfo');
 				$tmpPDFTable = $this->pdfTables[$tmpNode->getAttribute('id')];
 				$tmpPDFTable->setTableTitle($tmpNode->getAttribute('displayName'));
@@ -155,7 +179,7 @@ class Php_AndreaBoccaccio_Model_PDFXmlSqlQueriesManager extends Php_AndreaBoccac
 			$tmpPDFTable->AliasNbPages();
 			$tmpPDFTable->AddPage();
 			$tmpPDFTable->simpleTable($res["result"]["result"]);
-			$tmpPDFTable->Output();
+			$tmpPDFTable->Output($queryId, 'I');
 		}
 	}
 }
