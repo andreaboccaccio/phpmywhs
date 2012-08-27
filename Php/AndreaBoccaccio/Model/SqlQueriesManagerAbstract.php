@@ -130,7 +130,11 @@ abstract class Php_AndreaBoccaccio_Model_SqlQueriesManagerAbstract implements Ph
 			var_dump($strSQLCount);
 			var_dump($res);
 		}
-		$ret["requestedPage"] = $requestedPage;
+		if($requestedPage !== null) {
+			$ret["requestedPage"] = $requestedPage;
+		} else {
+			$ret["requestedPage"] = -1;
+		}
 		$ret["rowsPerPage"] = intval($rowsPerPage);
 		$ret["totalRows"] = $totalRows;
 		$ret["totalPages"] = $totalPages;
@@ -151,6 +155,7 @@ abstract class Php_AndreaBoccaccio_Model_SqlQueriesManagerAbstract implements Ph
 			} else {
 				$ret["actualPage"] = 0;
 				$ret["actualOffset"] = 0;
+				$ret["totalPages"] = 1;
 				$strSQL .= ") AS T01 " . $strSQLOptional . $strSQLOrderBy . ";";
 			}
 			//var_dump($strSQL);

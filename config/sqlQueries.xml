@@ -35,6 +35,41 @@ along with phpmywhs.  If not, see <http://www.gnu.org/licenses/>.
 					,code
 					,name
 		</strSQL>
+		<printInfo>
+			<rowInfo headerHSize="7" bodyHSize="6" />
+			<columnInfo sqlId="Categoria" wSize="40">
+				<header display="Categoria" fontFamily="Helvetica" fontStyle="B"
+					fontSize="14" align="C"	textColor="0,0,0" fill="enabled"
+					fillColor="255,255,255"	border="LTRB" />
+				<body fontFamily="Times" fontStyle="" fontSize="12" align="L"
+					textColor="0,0,0" fill="enabled" fillAColor="200,200,200"
+					fillBColor="255,255,255" border="LR" format="text" />
+			</columnInfo>
+			<columnInfo sqlId="Codice" wSize="50">
+				<header display="Codice" fontFamily="Helvetica" fontStyle="B"
+					fontSize="14" align="C"	textColor="0,0,0" fill="enabled"
+					fillColor="255,255,255"	border="LTRB" />
+				<body fontFamily="Times" fontStyle="" fontSize="12" align="L"
+					textColor="0,0,0" fill="enabled" fillAColor="200,200,200"
+					fillBColor="255,255,255" border="LR" format="text" />
+			</columnInfo>
+			<columnInfo sqlId="Nome" wSize="35">
+				<header display="Nome" fontFamily="Helvetica" fontStyle="B"
+					fontSize="14" align="C"	textColor="0,0,0" fill="enabled"
+					fillColor="255,255,255"	border="LTRB" />
+				<body fontFamily="Times" fontStyle="" fontSize="12" align="L"
+					textColor="0,0,0" fill="enabled" fillAColor="200,200,200"
+					fillBColor="255,255,255" border="LR" format="text" />
+			</columnInfo>
+			<columnInfo sqlId="QTA_Caricata" wSize="35">
+				<header display="QTA_Caricata" fontFamily="Helvetica" fontStyle="B"
+					fontSize="14" align="C"	textColor="0,0,0" fill="enabled"
+					fillColor="255,255,255"	border="LTRB" />
+				<body fontFamily="Times" fontStyle="" fontSize="12" align="R"
+					textColor="0,0,0" fill="enabled" fillAColor="200,200,200"
+					fillBColor="255,255,255" border="LR" format="integer" />
+			</columnInfo>
+		</printInfo>
 	</sqlQuery>
 	<sqlQuery id="stocks" displayName="Giacenze per Categoria, Codice e Nome">
 		<strSQL>
@@ -76,6 +111,57 @@ along with phpmywhs.  If not, see <http://www.gnu.org/licenses/>.
 				,ITEM_IN.Codice
 				,ITEM_IN.Nome
 		</strSQL>
+		<printInfo>
+			<rowInfo headerHSize="7" bodyHSize="6" />
+			<columnInfo sqlId="Categoria" wSize="40">
+				<header display="Categoria" fontFamily="Helvetica" fontStyle="B"
+					fontSize="12" align="C"	textColor="0,0,0" fill="enabled"
+					fillColor="255,255,255"	border="LTRB" />
+				<body fontFamily="Times" fontStyle="" fontSize="10" align="L"
+					textColor="0,0,0" fill="enabled" fillAColor="200,200,200"
+					fillBColor="255,255,255" border="LR" format="text" />
+			</columnInfo>
+			<columnInfo sqlId="Codice" wSize="50">
+				<header display="Codice" fontFamily="Helvetica" fontStyle="B"
+					fontSize="12" align="C"	textColor="0,0,0" fill="enabled"
+					fillColor="255,255,255"	border="LTRB" />
+				<body fontFamily="Times" fontStyle="" fontSize="10" align="L"
+					textColor="0,0,0" fill="enabled" fillAColor="200,200,200"
+					fillBColor="255,255,255" border="LR" format="text" />
+			</columnInfo>
+			<columnInfo sqlId="Nome" wSize="30">
+				<header display="Nome" fontFamily="Helvetica" fontStyle="B"
+					fontSize="12" align="C"	textColor="0,0,0" fill="enabled"
+					fillColor="255,255,255"	border="LTRB" />
+				<body fontFamily="Times" fontStyle="" fontSize="10" align="L"
+					textColor="0,0,0" fill="enabled" fillAColor="200,200,200"
+					fillBColor="255,255,255" border="LR" format="text" />
+			</columnInfo>
+			<columnInfo sqlId="QTA_Caricata" wSize="30">
+				<header display="QTA_Caricata" fontFamily="Helvetica" fontStyle="B"
+					fontSize="14" align="C"	textColor="0,0,0" fill="enabled"
+					fillColor="255,255,255"	border="LTRB" />
+				<body fontFamily="Times" fontStyle="" fontSize="10" align="R"
+					textColor="0,0,0" fill="enabled" fillAColor="200,200,200"
+					fillBColor="255,255,255" border="LR" format="integer" />
+			</columnInfo>
+			<columnInfo sqlId="QTA_Scaricata" wSize="30">
+				<header display="QTA_Scaricata" fontFamily="Helvetica" fontStyle="B"
+					fontSize="12" align="C"	textColor="0,0,0" fill="enabled"
+					fillColor="255,255,255"	border="LTRB" />
+				<body fontFamily="Times" fontStyle="" fontSize="10" align="R"
+					textColor="0,0,0" fill="enabled" fillAColor="200,200,200"
+					fillBColor="255,255,255" border="LR" format="integer" />
+			</columnInfo>
+			<columnInfo sqlId="Giacenza" wSize="20">
+				<header display="Giacenza" fontFamily="Helvetica" fontStyle="B"
+					fontSize="12" align="C"	textColor="0,0,0" fill="enabled"
+					fillColor="255,255,255"	border="LTRB" />
+				<body fontFamily="Times" fontStyle="" fontSize="10" align="R"
+					textColor="0,0,0" fill="enabled" fillAColor="200,200,200"
+					fillBColor="255,255,255" border="LR" format="integer" />
+			</columnInfo>
+		</printInfo>
 	</sqlQuery>
 	<sqlQuery id="suppliers" displayName="Fornitori">
 		<strSQL>
@@ -85,6 +171,25 @@ along with phpmywhs.  If not, see <http://www.gnu.org/licenses/>.
 				GROUP BY contractor_code
 					,contractor
 		</strSQL>
+		<printInfo>
+			<rowInfo headerHSize="7" bodyHSize="6" />
+			<columnInfo sqlId="PIVA" wSize="40">
+				<header display="PIVA" fontFamily="Helvetica" fontStyle="B"
+					fontSize="14" align="C"	textColor="0,0,0" fill="enabled"
+					fillColor="255,255,255"	border="LTRB" />
+				<body fontFamily="Times" fontStyle="" fontSize="12" align="L"
+					textColor="0,0,0" fill="enabled" fillAColor="200,200,200"
+					fillBColor="255,255,255" border="LR" format="text" />
+			</columnInfo>
+			<columnInfo sqlId="fornitore" wSize="40">
+				<header display="fornitore" fontFamily="Helvetica" fontStyle="B"
+					fontSize="14" align="C"	textColor="0,0,0" fill="enabled"
+					fillColor="255,255,255"	border="LTRB" />
+				<body fontFamily="Times" fontStyle="" fontSize="12" align="L"
+					textColor="0,0,0" fill="enabled" fillAColor="200,200,200"
+					fillBColor="255,255,255" border="LR" format="text" />
+			</columnInfo>
+		</printInfo>
 	</sqlQuery>
 	<wizard id="newItemOut" displayName="Articoli con giacenze attive">
 		<strSQL>

@@ -24,7 +24,7 @@ along with phpmywhs.  If not, see <http://www.gnu.org/licenses/>.
 	<factory id="db">
 		<class default="yes" id="Php_AndreaBoccaccio_Db_DbNull" />
 		<class default="no" id="Php_AndreaBoccaccio_Db_DbVoid" />
-		<class default="no" id="Php_AndreaBoccaccio_Db_DbVerySimpleMySql" />
+		<class default="no" id="Php_AndreaBoccaccio_Db_DbVerySimpleMySqlI" />
 	</factory>
 	<factory id="login">
 		<class default="yes" id="Php_AndreaBoccaccio_Login_LoginNull" />
@@ -48,7 +48,7 @@ along with phpmywhs.  If not, see <http://www.gnu.org/licenses/>.
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewCauseList" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewCauseInsert" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewCause" />
-		<class default="no" id="Php_AndreaBoccaccio_View_ViewSqlQueries" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewPDFSqlQueries" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewItemOutWizard" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewItemInWizard" />
 	</factory>
