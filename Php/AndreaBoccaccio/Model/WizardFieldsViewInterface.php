@@ -20,22 +20,7 @@
  * along with phpmywhs. If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-class Php_AndreaBoccaccio_Model_ItemOutWizard extends Php_AndreaBoccaccio_Model_WizardInsViewAbstract
-{
-	private static $instance = null;
+interface Php_AndreaBoccaccio_Model_WizardFieldsViewInterface extends Php_AndreaBoccaccio_Model_WizardInterface {
 	
-	private function __clone() {
-	
-	}
-	
-	private function __construct() {
-		$this->setWizKind('newItemOut');
-	}
-	
-	public static function getInstance() {
-		if(self::$instance == null) {
-			self::$instance = new Php_AndreaBoccaccio_Model_ItemOutWizard();
-		}
-		return self::$instance;
-	}
+	public function getFieldsView();
 }

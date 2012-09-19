@@ -49,8 +49,8 @@ along with phpmywhs.  If not, see <http://www.gnu.org/licenses/>.
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewCauseInsert" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewCause" />
 		<class default="no" id="Php_AndreaBoccaccio_View_ViewPDFSqlQueries" />
-		<class default="no" id="Php_AndreaBoccaccio_View_ViewItemOutWizard" />
-		<class default="no" id="Php_AndreaBoccaccio_View_ViewItemInWizard" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewItemOutWizardInsView" />
+		<class default="no" id="Php_AndreaBoccaccio_View_ViewItemInWizardInsView" />
 	</factory>
 	<factory id="mappingModel">
 		<class default="yes" id="Php_AndreaBoccaccio_Model_MappingModelNull" />

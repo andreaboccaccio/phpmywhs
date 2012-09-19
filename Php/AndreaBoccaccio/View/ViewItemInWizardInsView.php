@@ -20,8 +20,8 @@
  * along with phpmywhs. If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-class Php_AndreaBoccaccio_Model_ItemOutWizard extends Php_AndreaBoccaccio_Model_WizardInsViewAbstract
-{
+class Php_AndreaBoccaccio_View_ViewItemInWizardInsView extends Php_AndreaBoccaccio_View_ViewWizardAbstract {
+	
 	private static $instance = null;
 	
 	private function __clone() {
@@ -29,12 +29,14 @@ class Php_AndreaBoccaccio_Model_ItemOutWizard extends Php_AndreaBoccaccio_Model_
 	}
 	
 	private function __construct() {
-		$this->setWizKind('newItemOut');
+		$this->setKind('itemInWizard');
+		$this->setWizard(Php_AndreaBoccaccio_Model_ItemInWizard::getInstance());
+		$this->setQueryId('newItemIn');
 	}
 	
 	public static function getInstance() {
 		if(self::$instance == null) {
-			self::$instance = new Php_AndreaBoccaccio_Model_ItemOutWizard();
+			self::$instance = new Php_AndreaBoccaccio_View_ViewItemInWizardInsView();
 		}
 		return self::$instance;
 	}

@@ -230,10 +230,25 @@ along with phpmywhs.  If not, see <http://www.gnu.org/licenses/>.
 			WHERE ((QTA_Caricata - IFNULL(QTA_Scaricata,0)) > 0)
 		</strSQL>
 		<fieldsMapping>
+			<insView id="itemOutNew"/>
 			<fieldMapping sql="Categoria" viewInsert="kind"/>
 			<fieldMapping sql="Codice" viewInsert="code"/>
 			<fieldMapping sql="Nome" viewInsert="name"/>
 		</fieldsMapping>
+		<fieldsView>
+			<fieldView sql="Categoria" viewField="Categoria"/>
+			<fieldView sql="Codice" viewField="Codice"/>
+			<fieldView sql="Nome" viewField="Nome"/>
+			<fieldView sql="QTA_Caricata" viewField="QTA_Caricata"/>
+			<fieldView sql="Giacenza" viewField="Giacenza"/>
+		</fieldsView>
+		<fieldsFilter>
+			<fieldFilter sql="Categoria" filterField="Categoria"/>
+			<fieldFilter sql="Codice" filterField="Codice"/>
+			<fieldFilter sql="Nome" filterField="Nome"/>
+			<fieldFilter sql="QTA_Caricata" filterField="QTA_Caricata"/>
+			<fieldFilter sql="Giacenza" filterField="Giacenza"/>
+		</fieldsFilter>
 	</wizard>
 	<wizard id="newItemIn" displayName="Articoli immessi nel sistema">
 		<strSQL>
@@ -261,9 +276,20 @@ along with phpmywhs.  If not, see <http://www.gnu.org/licenses/>.
 				,name
 		</strSQL>
 		<fieldsMapping>
+			<insView id="itemNew"/>
 			<fieldMapping sql="Categoria" viewInsert="kind"/>
 			<fieldMapping sql="Codice" viewInsert="code"/>
 			<fieldMapping sql="Nome" viewInsert="name"/>
 		</fieldsMapping>
+		<fieldsView>
+			<fieldView sql="Categoria" viewField="Categoria"/>
+			<fieldView sql="Codice" viewField="Codice"/>
+			<fieldView sql="Nome" viewField="Nome"/>
+		</fieldsView>
+		<fieldsFilter>
+			<fieldFilter sql="Categoria" filterField="Categoria"/>
+			<fieldFilter sql="Codice" filterField="Codice"/>
+			<fieldFilter sql="Nome" filterField="Nome"/>
+		</fieldsFilter>
 	</wizard>
 </sqlQueries>
